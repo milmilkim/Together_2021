@@ -51,6 +51,11 @@ h1 {
   font-weight: 700;
 }
 
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
 .topMenu a {
   color: #000000;
   transition: color 0.3s;
@@ -67,6 +72,9 @@ h1 {
   background-color: white;
 }
 
+.headerNav {
+  padding: 5px;
+}
 .header_wrap,
 .headerNav,
 .footerText {

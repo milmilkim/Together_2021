@@ -35,7 +35,7 @@ const Layout = () => {
       <Header>
         <div className="header_wrap">
           <div className="logo">
-            <Link to="/">LOGO</Link>
+            <Link to="/">함께, 운동</Link>
           </div>
           <div className="topMenu">
             <Space size="middle">

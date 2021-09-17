@@ -69,7 +69,19 @@ const Layout = () => {
         </BackTop>
       </Content>
       <Footer>
-        <div className="footerText">&copy;403 Forbidden</div>
+        <div className="footerText">
+          &copy;403 Forbidden
+          <div>
+            Icons made by{' '}
+            <a href="https://www.freepik.com" title="">
+              freepik{' '}
+            </a>
+            from{' '}
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              www.flaticon.com
+            </a>
+          </div>
+        </div>
       </Footer>
     </AntLayout>
   );

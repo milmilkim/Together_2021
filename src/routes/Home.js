@@ -15,7 +15,7 @@ const Home = () => {
   const setCarousel = [
     {
       id: 1,
-      src: 'https://images.unsplash.com/photo-1556135581-ef5f6350d9f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1233&q=80',
+      src: 'banner.jpg',
     },
     {
       id: 2,

@@ -1,5 +1,25 @@
+@font-face {
+  font-family: 'IM_Hyemin-Bold';
+  src: url('font/IM_Hyemin-Bold.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --point-color: #5cdbd3;
+}
+
+h1 {
+  font-family: IM_Hyemin-Bold;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  text-decoration: underline 7px var(--point-color);
+  text-underline-position: from-font;
+}
+
 .ant-layout-header {
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid #e2e1e1;
   height: auto;
   top: 0;
   z-index: 1;
@@ -9,6 +29,7 @@
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
+  font-family: IM_Hyemin-Bold;
 }
 
 .ant-layout-content {
@@ -57,12 +78,53 @@
   position: fixed;
 }
 
+.home__icons {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home__icons img {
+  width: 50px;
+  height: 50px;
+  transition: all 300ms ease;
+}
+
+.home__icons--icon img:hover {
+  opacity: 0.8;
+}
+
+.home__icons--icon {
+  margin: 10px;
+}
+
 .ant-layout-footer {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f0f0f0;
 }
+
+.ant-row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.ant-col:first-child {
+  padding-left: 0 !important;
+}
+
+.ant-col:last-child {
+  padding-right: 0 !important;
+}
+
+.card__spin {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1024px) {
   .header_wrap,
   .ant-layout-content,

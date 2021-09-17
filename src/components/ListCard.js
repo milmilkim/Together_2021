@@ -1,37 +1,32 @@
 import { Card, Avatar, Row, Col } from 'antd';
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+import { TeamOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
-const ListCard = ({ id, title, thumb, description, profileImg }) => {
+const ListCard = ({ children }) => {
+  const { description, thumbnail, profileImg, title, count, city, hashtag } =
+    children;
   const { Meta } = Card;
 
   const thumbCrob = {
-    width: '300px',
-    height: '300px',
+    width: '100%',
+    height: '200px',
     objectFit: 'cover',
+    borderRadius: '10px',
   };
 
   return (
-    <Col span={8}>
-      <Card
-        style={{ width: 300 }}
-        cover={<img style={thumbCrob} alt={description} src={thumb} />}
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
-        ]}
-      >
-        <Meta
-          avatar={<Avatar src={profileImg} />}
-          title={title}
-          description={description}
-        />
-        id:{id}
-      </Card>
+    <Col xs={24} sm={12} md={8}>
+      <Link to="/contents">
+        <Card
+          bordered={false}
+          cover={<img style={thumbCrob} alt={description} src={thumbnail} />}
+        >
+          <Meta avatar={<Avatar src={profileImg} />} title={title} />
+          {city} <TeamOutlined style={{ fontSize: 14 }} />
+          {count}
+          <br />#{hashtag}
+        </Card>
+      </Link>
     </Col>
   );
 };

@@ -14,13 +14,24 @@ const imgFit = {
   objectFit: 'cover',
 };
 
-const HomeCarousel = ({ children }) => {
+const setCarousel = [
+  {
+    key: 1,
+    src: 'banner.jpg',
+  },
+  {
+    key: 2,
+    src: 'https://resize.hswstatic.com/w_1200/gif/arctic-fox-1.jpg',
+  },
+];
+
+const HomeCarousel = () => {
   return (
     <Carousel autoplay>
-      {children.map((list) => (
-        <div>
+      {setCarousel.map((list, index) => (
+        <div key={index}>
           <h3 style={contentStyle}>
-            <img style={imgFit} src={list.src} alt={list.id} />
+            <img style={imgFit} src={list.src} alt={list.src} />
           </h3>
         </div>
       ))}

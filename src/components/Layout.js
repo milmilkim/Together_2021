@@ -1,21 +1,12 @@
-import { Layout as AntLayout, Space, BackTop } from 'antd';
-import {
-  PlusSquareOutlined,
-  MessageOutlined,
-  ArrowUpOutlined,
-} from '@ant-design/icons';
-
-import Navigation from 'components/Navigation';
+import { Layout as AntLayout, BackTop } from 'antd';
+import { ArrowUpOutlined } from '@ant-design/icons';
 import 'components/Layout.css';
-import { Badge } from 'antd';
-import SearchBox from 'components/SearchBox';
-import TopProfile from 'components/TopProfile';
-
-import { Link } from 'react-router-dom';
+import LayoutHeader from './LayoutComponents/LayoutHeader';
 import AppRouter from './Router';
+import LayoutFooter from 'components/LayoutComponents/LayoutFooter';
 
 const Layout = () => {
-  const { Header, Content, Footer } = AntLayout;
+  const { Content, Footer } = AntLayout;
 
   const style = {
     height: 40,
@@ -32,33 +23,8 @@ const Layout = () => {
 
   return (
     <AntLayout className="layout">
-      <Header>
-        <div className="header_wrap">
-          <div className="logo">
-            <Link to="/">함께, 운동</Link>
-          </div>
-          <div className="topMenu">
-            <Space size="middle">
-              <SearchBox />
-              <a>
-                <PlusSquareOutlined style={{ fontSize: '30px' }} />
-              </a>
-              <Badge count={1}>
-                <a>
-                  <MessageOutlined style={{ fontSize: '30px' }} />
-                </a>
-              </Badge>
-              <a>
-                <TopProfile />
-              </a>
-              <Link to="/Login">Login</Link>
-            </Space>
-          </div>
-        </div>
-        <div className="headerNav">
-          <Navigation />
-        </div>
-      </Header>
+      <LayoutHeader />
+
       <div className="mobileMenu">모바일 메뉴를 만들어야 합니다..</div>
       <Content>
         <AppRouter />
@@ -68,21 +34,8 @@ const Layout = () => {
           </div>
         </BackTop>
       </Content>
-      <Footer>
-        <div className="footerText">
-          &copy;403 Forbidden
-          <div>
-            Icons made by{' '}
-            <a href="https://www.freepik.com" title="">
-              freepik{' '}
-            </a>
-            from{' '}
-            <a href="https://www.flaticon.com/" title="Flaticon">
-              www.flaticon.com
-            </a>
-          </div>
-        </div>
-      </Footer>
+
+      <LayoutFooter />
     </AntLayout>
   );
 };

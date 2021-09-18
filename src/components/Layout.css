@@ -7,35 +7,40 @@
 
 :root {
   --point-color: #5cdbd3;
+  --header-height: 100px;
+  --footer-height: 90px;
+  --mobileMenu_height: 64px;
+  --height100: calc(100vh - (var(--header-height) + var(--footer-height)));
+  --contents-width: 1024px;
+  --color-gray: #e2e1e1;
 }
 
 h1 {
   font-family: IM_Hyemin-Bold;
   font-weight: bold;
-  padding: 10px;
+  padding: 0;
   text-align: center;
   text-decoration: underline 7px var(--point-color);
-  text-underline-position: from-font;
 }
 
 .ant-layout-header {
   border-bottom: 1px solid #e2e1e1;
-  height: auto;
+  height: 100px;
   top: 0;
   z-index: 1;
   position: sticky;
-  line-height: 1.5;
   display: flex;
+  line-height: 1.5;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   font-family: IM_Hyemin-Bold;
 }
 
 .ant-layout-content {
-  width: 1024px;
-  overflow: hidden;
-  min-height: 100vh;
+  width: var(--contents-width);
+  min-height: var(--height100);
   margin: 0 auto;
 }
 
@@ -78,7 +83,7 @@ h1 {
 .header_wrap,
 .headerNav,
 .footerText {
-  width: 1024px;
+  width: var(--contents-width);
   margin: 0;
 }
 

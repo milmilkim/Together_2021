@@ -3,15 +3,17 @@ import Contents from 'routes/Contents';
 import Home from 'routes/Home';
 import Login from 'routes/Login';
 import ScrollToTop from './ScrollToTop';
+import Messages from 'routes/Messages';
 
 const AppRouter = () => {
   return (
     <>
       <ScrollToTop />
       <Switch>
-        <Route path="/" exact component={Home}></Route>
-        <Route exact path="/contents" component={Contents}></Route>
-        <Route exact path="/login" component={Login}></Route>
+        <Route path="/" exact component={Home} />
+        <Route exact path="/contents" component={Contents} />
+        <Route exact path="/login" component={Login} />
+        <Route path="/messages" component={Messages} />
       </Switch>
     </>
   );

@@ -1,8 +1,7 @@
 import HomeCarousel from 'components/HomeCarousel';
 import ListCard from 'components/ListCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Col, Row, Spin } from 'antd';
-import { SmileTwoTone } from '@ant-design/icons';
+import { Row, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -11,28 +10,15 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState('');
   const [item, setItem] = useState([]);
-
-  const setCarousel = [
-    {
-      id: 1,
-      src: 'banner.jpg',
-    },
-    {
-      id: 2,
-      src: 'https://resize.hswstatic.com/w_1200/gif/arctic-fox-1.jpg',
-    },
-  ];
+  const [hasMore, setHasMore] = useState(true);
 
   const getData = async () => {
     try {
       setLoading(true);
       await axios.get('dummy/dummyJson.json').then((res) => {
         const sortedRes = res.data.sort((a, b) => b.id - a.id);
-        console.log(sortedRes);
         setData(sortedRes.slice(0, 9));
         setItem(sortedRes.slice(9));
-        console.log(data);
-        console.log(item);
       });
     } catch (e) {
       console.log('-_-+');
@@ -41,10 +27,13 @@ const Home = () => {
     setLoading(false);
   };
 
-  const moreData = async () => {
+  const moreData = () => {
     setLoading(true);
     setData(data.concat(item.slice(0, 9)));
     setItem(item.slice(9));
+    if (item < 1) {
+      setHasMore(false);
+    }
     setLoading(false);
   };
 
@@ -54,7 +43,7 @@ const Home = () => {
 
   return (
     <>
-      <HomeCarousel>{setCarousel}</HomeCarousel>
+      <HomeCarousel />
 
       <div className="home__icons">
         <Link to="/#">
@@ -78,10 +67,24 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          <InfiniteScroll dataLength="10" next={moreData} hasMore={true}>
+          <InfiniteScroll
+            dataLength="10"
+            next={moreData}
+            loader={
+              <div className="card__spin">
+                <Spin tip="Loading..." />
+              </div>
+            }
+            hasMore={hasMore}
+            endMessage={
+              <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
+          >
             <Row gutter={10}>
-              {data.map((list) => (
-                <ListCard>{list}</ListCard>
+              {data.map((list, index) => (
+                <ListCard key={index}>{list}</ListCard>
               ))}
             </Row>
           </InfiniteScroll>

@@ -1,10 +1,18 @@
-import { Card, Avatar, Row, Col } from 'antd';
+import { Card, Avatar, Col } from 'antd';
 import { TeamOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const ListCard = ({ children }) => {
-  const { description, thumbnail, profileImg, title, count, city, hashtag } =
-    children;
+  const {
+    description,
+    thumbnail,
+    profileImg,
+    title,
+    count,
+    city,
+    hashtag,
+    id,
+  } = children;
   const { Meta } = Card;
 
   const thumbCrob = {
@@ -24,7 +32,8 @@ const ListCard = ({ children }) => {
           <Meta avatar={<Avatar src={profileImg} />} title={title} />
           {city} <TeamOutlined style={{ fontSize: 14 }} />
           {count}
-          <br />#{hashtag}
+          <br />#{hashtag} <br />
+          {id}
         </Card>
       </Link>
     </Col>

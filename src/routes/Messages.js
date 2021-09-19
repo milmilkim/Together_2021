@@ -58,7 +58,6 @@ const Messages = ({ history }) => {
           <MessagesList openMessagesModal={openMessagesModal} />
         </div>
       </div>
-
       <div>
         <MessagesRoom
           visible={visible}

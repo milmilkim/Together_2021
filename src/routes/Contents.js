@@ -1,5 +1,6 @@
 import { React } from 'react';
 import Map from 'routes/Map';
+import LocalSeraching from 'components/LocalSearching';
 
 const Contents = () => {
   const contentStyle = {
@@ -8,6 +9,8 @@ const Contents = () => {
 
   return (
     <div className="TestComponent">
+      <h1>연습장 </h1>
+      <LocalSeraching />
       <Map />
       <div className="dummy" style={contentStyle}>
         <br />

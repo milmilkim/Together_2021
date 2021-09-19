@@ -5,7 +5,7 @@
 - 루트
   - :file_folder: public - 이미지 등...
     - :file_folder: dummy - dummy json (삭제예정)
-    - :page_facing_up: index.html - html의 header, 카카오 API
+    - :page_facing_up: index.html - html의 head, 카카오 API
   - :file_folder: src
     - :file_folder: components
       - :page_facing_up: Layout.css - 전체적인 css

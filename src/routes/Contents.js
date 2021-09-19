@@ -1,4 +1,5 @@
 import { React } from 'react';
+import Map from 'routes/Map';
 
 const Contents = () => {
   const contentStyle = {
@@ -7,6 +8,7 @@ const Contents = () => {
 
   return (
     <div className="TestComponent">
+      <Map />
       <div className="dummy" style={contentStyle}>
         <br />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus

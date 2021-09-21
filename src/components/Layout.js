@@ -2,6 +2,7 @@ import { Layout as AntLayout, BackTop } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons';
 import 'components/Layout.css';
 import LayoutHeader from './LayoutComponents/LayoutHeader';
+import MobileMenu from './LayoutComponents/MobileMenu';
 import AppRouter from './Router';
 import LayoutFooter from 'components/LayoutComponents/LayoutFooter';
 
@@ -25,7 +26,8 @@ const Layout = () => {
     <AntLayout className="layout">
       <LayoutHeader />
 
-      <div className="mobileMenu">모바일 메뉴를 만들어야 합니다..</div>
+
+      <MobileMenu />
       <Content>
         <AppRouter />
         <BackTop>

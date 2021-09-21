@@ -54,6 +54,7 @@ h1 {
   height: auto;
   font-size: 32px;
   font-weight: 700;
+  z-index: 1;
 }
 
 .logo img {
@@ -133,6 +134,7 @@ h1 {
   justify-content: center;
 }
 
+
 @media screen and (max-width: 1024px) {
   .header_wrap,
   .ant-layout-content,
@@ -143,6 +145,15 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
+
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .ant-layout-header{
+    height: 60px;
+  }
   .topMenu {
     display: none;
   }
@@ -159,11 +170,17 @@ h1 {
   }
 
   .headerNav {
-    position: absolute;
-    padding: 25px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    padding-left: 20px;
   }
 
   .ant-layout-footer {
     margin-bottom: 64px;
   }
+
+ 
+
 }

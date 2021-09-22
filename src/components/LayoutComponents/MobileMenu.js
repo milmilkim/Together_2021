@@ -11,7 +11,7 @@ import 'components/LayoutComponents/MobileMenu.css';
 const MobileMenu = () => {
   const activeStyle = {
     color: '#5cdbd3',
-  };
+  }; //path가 일치 할 때 메뉴 스타일
 
   return (
     <div className="mobileMenu">

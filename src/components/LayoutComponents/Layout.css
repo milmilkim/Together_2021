@@ -1,9 +1,28 @@
+/* 폰트 */
 @font-face {
   font-family: 'IM_Hyemin-Bold';
   src: url('font/IM_Hyemin-Bold.woff2') format('woff');
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'NanumBarunGothic';
+  src: url('font/NanumBarunGothicBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NanumBarunGothic';
+  src: url('font/NanumBarunGothic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+    font-family: NanumBarunGothic;
+}
+
+/* 변수 */
 
 :root {
   --point-color: #5cdbd3;
@@ -15,6 +34,8 @@
   --color-gray: #e2e1e1;
 }
 
+/* 서식 */
+
 h1 {
   font-family: IM_Hyemin-Bold;
   font-weight: bold;
@@ -23,6 +44,7 @@ h1 {
   text-decoration: underline 7px var(--point-color);
 }
 
+/* 헤더 */
 .ant-layout-header {
   border-bottom: 1px solid #e2e1e1;
   height: 100px;
@@ -62,6 +84,7 @@ h1 {
   height: 40px;
 }
 
+/* 우측 상단 메뉴 */
 .topMenu a {
   color: #000000;
   transition: color 0.3s;
@@ -72,7 +95,7 @@ h1 {
 }
 
 
-
+/* 드롭다운 메뉴 */
 .headerNav {
   padding: 5px;
 }
@@ -86,6 +109,8 @@ h1 {
 .ant-dropdown {
   position: fixed;
 }
+
+/* 홈 이미지 카테고리 */
 
 .home__icons {
   padding: 20px;
@@ -107,6 +132,7 @@ h1 {
   margin: 10px;
 }
 
+/* 푸터 */
 .ant-layout-footer {
   display: flex;
   align-items: center;
@@ -114,19 +140,7 @@ h1 {
   background-color: #f0f0f0;
 }
 
-.ant-row {
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-}
-
-.ant-col:first-child {
-  padding-left: 0 !important;
-}
-
-.ant-col:last-child {
-  padding-right: 0 !important;
-}
-
+/* 스핀 */
 .card__spin {
   margin-top: 100px;
   display: flex;
@@ -135,6 +149,7 @@ h1 {
 }
 
 
+/* 반응형*/
 @media screen and (max-width: 1024px) {
   .header_wrap,
   .ant-layout-content,
@@ -145,8 +160,6 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-
-
   .logo {
     font-size: 24px;
   }

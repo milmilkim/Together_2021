@@ -20,13 +20,15 @@ const Messages = ({ history }) => {
     setVisible(false);
   };
 
+  //채팅창 토글
+
   const goBack = () => {
     history.goBack();
-  };
+  }; //뒤로가기 버튼
 
   useEffect(() => {
     return () => {
-      setLayoutVisible(true);
+      setLayoutVisible(true); //채팅을 나가면 레이아웃이 보임
     };
   }, []);
 
@@ -41,7 +43,7 @@ const Messages = ({ history }) => {
           </div>
           <div className="messages__header--column">
             <span>
-              <h1>MESSASGES</h1>
+              <h1>MESSAGES</h1>
             </span>
           </div>
           <div className="messages__header--column" />

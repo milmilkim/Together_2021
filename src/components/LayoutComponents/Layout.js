@@ -1,13 +1,13 @@
 import { Layout as AntLayout, BackTop } from 'antd';
 import { ArrowUpOutlined } from '@ant-design/icons';
-import 'components/Layout.css';
-import LayoutHeader from './LayoutComponents/LayoutHeader';
-import MobileMenu from './LayoutComponents/MobileMenu';
-import AppRouter from './Router';
+import LayoutHeader from 'components/LayoutComponents/LayoutHeader';
+import MobileMenu from 'components/LayoutComponents/MobileMenu';
+import AppRouter from 'components/Router';
 import LayoutFooter from 'components/LayoutComponents/LayoutFooter';
+import 'components/LayoutComponents/Layout.css';
 
 const Layout = () => {
-  const { Content, Footer } = AntLayout;
+  const { Content } = AntLayout;
 
   const style = {
     height: 40,
@@ -30,11 +30,13 @@ const Layout = () => {
       <MobileMenu />
       <Content>
         <AppRouter />
+
         <BackTop>
           <div style={style}>
             <ArrowUpOutlined />
           </div>
-        </BackTop>
+        </BackTop>    {/*앵커*/}
+
       </Content>
 
       <LayoutFooter />

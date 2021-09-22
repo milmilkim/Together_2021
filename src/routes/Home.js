@@ -1,16 +1,9 @@
 import HomeCarousel from 'components/HomeCarousel';
-
-import { Row, Spin } from 'antd';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ListCard from 'components/ListCard';
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState('');
-  const [item, setItem] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
+
 
   return (
     <>

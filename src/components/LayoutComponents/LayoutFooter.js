@@ -1,11 +1,13 @@
 import { Layout as AntLayout } from 'antd';
 import { useRecoilState } from 'recoil';
 import { layoutState } from 'state';
+import 'components/LayoutComponents/Layout.css';
 
 const Footer = () => {
   const { Footer } = AntLayout;
 
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
+  //layoutVisible이 true일 때만 출력
 
   return (
     <>

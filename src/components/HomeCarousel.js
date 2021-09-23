@@ -1,15 +1,16 @@
 import { Carousel } from 'antd';
 
 const contentStyle = {
-  height: '250px',
   color: '#fff',
+  width: "100%",
+  height: "auto",
   lineHeight: '160px',
   textAlign: 'center',
   background: '#364d79',
 };
 
 const imgFit = {
-  height: '250px',
+  height: '100%',
   width: '100%',
   objectFit: 'cover',
 };
@@ -21,15 +22,15 @@ const setCarousel = [
   },
   {
     key: 2,
-    src: 'https://resize.hswstatic.com/w_1200/gif/arctic-fox-1.jpg',
+    src: 'banner2.jpg',
   },
 ];
 
 const HomeCarousel = () => {
   return (
     <Carousel autoplay>
-      {setCarousel.map((list, index) => (
-        <div key={index}>
+      {setCarousel.map((list) => (
+        <div key={list.key}>
           <h3 style={contentStyle}>
             <img style={imgFit} src={list.src} alt={list.src} />
           </h3>

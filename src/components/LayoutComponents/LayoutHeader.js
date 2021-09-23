@@ -1,18 +1,21 @@
-import { Layout as AntLayout, Space, BackTop } from 'antd';
+import { Layout as AntLayout, Space } from 'antd';
 import { PlusSquareOutlined, MessageOutlined } from '@ant-design/icons';
 
 import Navigation from 'components/Navigation';
-import 'components/Layout.css';
 import { Badge } from 'antd';
-import SearchBox from 'components/SearchBox';
-import TopProfile from 'components/TopProfile';
+import SearchBox from 'components/LayoutComponents/SearchBox';
+import TopProfile from 'components/LayoutComponents/TopProfile';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { layoutState } from 'state';
 
+import 'components/LayoutComponents/Layout.css';
+
+
 const LayoutHeader = () => {
   const { Header } = AntLayout;
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
+  //layoutVisible이 true일 때만 출력
 
   return (
     <>

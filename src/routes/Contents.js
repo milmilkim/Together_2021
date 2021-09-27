@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { useRef, useEffect } from 'react';
 import Map from 'routes/Map';
 import LocalSeraching from 'components/LocalSearching';
 
@@ -7,12 +7,26 @@ const Contents = () => {
     height: '1000vh',
   };
 
+  const scrollRef = useRef(null);
+
+  const scrollToBottom = () => {
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
+
   return (
     <div className="TestComponent">
       <h1>연습장 </h1>
       <LocalSeraching />
       <Map />
-      <div className="dummy" style={contentStyle}>
+      <div className="dummy" ref={scrollRef} style={contentStyle}>
         <br />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus
         volutpat viverra. Aliquam ut tempus justo. Sed blandit dictum orci et

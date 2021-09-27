@@ -22,7 +22,7 @@ const ListCard = () => {
   const getData = async () => {
     try {
       setLoading(true);
-      await axios.get('dummy/dummyJson.json').then(res => { 
+      await axios.get('dummy/dummyJson.json').then(res => {
         const sortedRes = res.data.sort((a, b) => b.id - a.id); //정렬
         setData(sortedRes.slice(0, 9)); //9개 자름
         setItem(sortedRes.slice(9)); //나머지 저장
@@ -35,10 +35,11 @@ const ListCard = () => {
   };
 
   const moreData = () => {
+    console.log('more data...');
     setLoading(true);
     setData(data.concat(item.slice(0, 9)));
     setItem(item.slice(9));
-    if (item < 1) {
+    if (item.length < 1) {
       setHasMore(false);
     }
     setLoading(false);
@@ -57,7 +58,7 @@ const ListCard = () => {
       ) : (
         <div className="listCard">
           <InfiniteScroll
-            dataLength="10"
+            dataLength="9"
             next={moreData}
             loader={
               <div className="card__spin">

@@ -2,69 +2,113 @@ import { PageHeader } from 'antd';
 import { Input } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 
+import 'components/ListCard.scss';
+import axios from 'axios';
+import { useEffect, useState, useRef } from 'react';
+
+import Message from 'components/Message';
+import ScrollToTop from 'components/ScrollToTop';
+
 const MessagesRoom = ({ visible, closeMessagesModal }) => {
   const { TextArea } = Input;
 
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [item, setItem] = useState([]);
+  const [scroll, setScroll] = useState('');
+
+  const scrollRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (loading === false) {
+      scrollRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest',
+      });
+    }
+  };
+
+  const getData = async () => {
+    try {
+      setLoading(true);
+      await axios.get('dummy/fakeChat.json').then(res => {
+        const datas = res.data;
+        setData(datas.slice(-12));
+        setItem(datas.slice(0, datas.length - 9));
+      });
+    } catch (e) {
+      console.log('-_-+');
+    }
+    setLoading(false);
+  };
+
+  const moreData = () => {
+    setLoading(true);
+    console.log('more data...');
+    setData(item.slice(-9).concat(data));
+    setItem(item.slice(0, item.length - 9));
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [visible]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <div className={'messages__modal ' + visible}>
-      <PageHeader
-        className="site-page-header"
-        onBack={() => closeMessagesModal()}
-        title="이름"
-        subTitle="@aa"
-      />
+    <>
+      {visible ? (
+        <div className="messages__modal">
+          <PageHeader
+            className="site-page-header"
+            onBack={() => closeMessagesModal()}
+            title="이름"
+            subTitle="@aa"
+          />
 
-      <div className="messages__modal--container">
-        <div className="messages__modal--input">
-          <div className="messages__modal--input--textArea">
-            <TextArea
-              placeholder="입력"
-              autoSize={{ minRows: 1, maxRows: 6 }}
-            />
-          </div> 
+          <div className="messages__modal--container">
+            <div className="messages__modal--input">
+              <div className="messages__modal--input--textArea">
+                <TextArea
+                  placeholder="입력"
+                  autoSize={{ minRows: 1, maxRows: 6 }}
+                />
+              </div>
 
-          <div className="messages_modal--input--send">
-            <SendOutlined />
-          </div>
-        </div> {/* 텍스트 입력창 */}
-        <div className="messages__modal--messages">
-         
-          {/* 여기서부터 수정이 필요합니다 */}
-          <div className="chat__timestamp">2021년 9월 19일</div>
-
-          {/* 받은 메세지 */}
-          <div className="message-row">
-            <img src="https://ww.namu.la/s/50ec79e07868dd8be7c62f3ca97267517b4f7b8d43b05470c645b336541fdd3593e3a3469a82a8c904f050382ff3c8551606ac7de623941d726582f74a03670a7f0972e3a8439ec9911ee60a1a5c76e1856d5e55e53a42f365f1c95a145ef612" alt="임시" />
-            <div className="message-row__content">
-              <span className="message__author">이름</span>
-              <div className="message__info">
-                <span className="message__bubble">
-                  Give me that, hook that, spin that roulette
-                </span>
-                <span className="message__time">21:34</span>
+              <div className="messages_modal--input--send">
+                <SendOutlined />
+              </div>
+            </div>
+            {/* 텍스트 입력창 */}
+            <div className="messages__modal--messages">
+              <div ref={scrollRef}>
+                {loading ? (
+                  <>loading...</>
+                ) : (
+                  <>
+                    <button onClick={moreData}>ㅇㅇ</button>
+                    {data.map((list, index) => (
+                      <Message
+                        key={index}
+                        user={list.user}
+                        message={list.message}
+                      />
+                    ))}
+                  </>
+                )}{' '}
               </div>
             </div>
           </div>
-          {/* 받은 메세지 */}
-
-          {/* 보낸 메세지 */}
-          <div className="message-row message-row--own">
-            <div className="message-row__content">
-              <div className="message__info">
-                <span className="message__bubble">
-                  Vodka in my cup 빙빙 도는 Spin it, tip it, strip it, shawty
-                </span>
-                <span className="message__time">23:17</span>
-              </div>
-            </div>
-          </div>
-          {/* 보낸 메세지 */}
-
-          {/* 여기까지  */}
-
         </div>
-      </div>
-    </div>
+      ) : (
+        <div ref={scrollRef} />
+      )}
+    </>
   );
 };
 

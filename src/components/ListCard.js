@@ -10,6 +10,7 @@ import {
   CalendarOutlined,
   FieldTimeOutlined,
 } from '@ant-design/icons';
+import moment from 'moment';
 
 const ListCard = () => {
   const [data, setData] = useState([]);
@@ -81,20 +82,26 @@ const ListCard = () => {
                       style={{ width: '100%' }}
                       cover={<img alt="example" src={list.thumbnail} />}
                       actions={[
-                        [<UserOutlined />, list.count],
-                        [<CalendarOutlined />, list.date],
-                        [<FieldTimeOutlined />, list.time],
+                        [<UserOutlined />, list.NeedPeopleNumber],
+                        [
+                          <CalendarOutlined />,
+                          moment(list.EventTime).format('YYYY-MM-DD'),
+                        ],
+                        [
+                          <FieldTimeOutlined />,
+                          moment(list.EventTime).format('hh:mm'),
+                        ],
                       ]}
                     >
                       <Meta
                         className="card__category"
-                        description={list.category}
+                        description={list.event}
                       />
                       <Meta
                         className="card__profile"
                         avatar={<Avatar size={60} src={list.profileImg} />}
                       />
-                      <Meta className="card__name" description={list.name} />
+                      <Meta className="card__name" description={list.writer} />
 
                       <Meta title={list.title} />
                       <Meta className="card__name" description={list.city} />
@@ -102,7 +109,7 @@ const ListCard = () => {
 
                       <Meta
                         className="card__summary"
-                        description={list.description}
+                        description={list.content}
                       />
                     </Card>
                   </Link>

@@ -12,6 +12,7 @@
     "babel-plugin-react-scoped-css": "^1.1.1",
     "craco-less": "^1.20.0",
     "craco-plugin-scoped-css": "^1.1.1",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
@@ -27,6 +28,7 @@
     "build": "craco build",
     "test": "craco test"
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": [
       "react-app",

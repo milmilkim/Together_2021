@@ -4,6 +4,7 @@ import Home from 'routes/Home';
 import Login from 'routes/Login';
 import ScrollToTop from './ScrollToTop';
 import Messages from 'routes/Messages';
+import WritePost from 'routes/WritePost';
 
 const AppRouter = () => {
   return (
@@ -13,6 +14,7 @@ const AppRouter = () => {
         <Route path="/" exact component={Home} />
         <Route exact path="/contents" component={Contents} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/writepost" component={WritePost}/>
         <Route path="/messages" component={Messages} />
       </Switch>
     </>

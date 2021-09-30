@@ -11,7 +11,6 @@ import { layoutState } from 'state';
 
 import 'components/LayoutComponents/Layout.css';
 
-
 const LayoutHeader = () => {
   const { Header } = AntLayout;
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
@@ -28,9 +27,9 @@ const LayoutHeader = () => {
             <div className="topMenu">
               <Space size="middle">
                 <SearchBox />
-                <a>
+                <Link to="/writepost">
                   <PlusSquareOutlined style={{ fontSize: '30px' }} />
-                </a>
+                </Link>
                 <Badge count={1}>
                   <Link to="/messages">
                     <MessageOutlined style={{ fontSize: '30px' }} />

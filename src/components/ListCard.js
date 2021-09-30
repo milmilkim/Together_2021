@@ -10,6 +10,7 @@ import {
   CalendarOutlined,
   FieldTimeOutlined,
 } from '@ant-design/icons';
+import moment from 'moment';
 
 const ListCard = () => {
   const [data, setData] = useState([]);
@@ -22,7 +23,7 @@ const ListCard = () => {
   const getData = async () => {
     try {
       setLoading(true);
-      await axios.get('dummy/dummyJson.json').then(res => { 
+      await axios.get('dummy/dummyJson.json').then(res => {
         const sortedRes = res.data.sort((a, b) => b.id - a.id); //정렬
         setData(sortedRes.slice(0, 9)); //9개 자름
         setItem(sortedRes.slice(9)); //나머지 저장
@@ -35,10 +36,11 @@ const ListCard = () => {
   };
 
   const moreData = () => {
+    console.log('more data...');
     setLoading(true);
     setData(data.concat(item.slice(0, 9)));
     setItem(item.slice(9));
-    if (item < 1) {
+    if (item.length < 1) {
       setHasMore(false);
     }
     setLoading(false);
@@ -57,7 +59,7 @@ const ListCard = () => {
       ) : (
         <div className="listCard">
           <InfiniteScroll
-            dataLength="10"
+            dataLength="9"
             next={moreData}
             loader={
               <div className="card__spin">
@@ -80,28 +82,37 @@ const ListCard = () => {
                       style={{ width: '100%' }}
                       cover={<img alt="example" src={list.thumbnail} />}
                       actions={[
-                        [<UserOutlined />, list.count],
-                        [<CalendarOutlined />, list.date],
-                        [<FieldTimeOutlined />, list.time],
+                        [<UserOutlined />, list.NeedPeopleNumber],
+                        [
+                          <CalendarOutlined />,
+                          moment(list.EventTime).format('YYYY-MM-DD'),
+                        ],
+                        [
+                          <FieldTimeOutlined />,
+                          moment(list.EventTime).format('hh:mm'),
+                        ],
                       ]}
                     >
                       <Meta
                         className="card__category"
-                        description={list.category}
+                        description={list.event}
                       />
                       <Meta
                         className="card__profile"
                         avatar={<Avatar size={60} src={list.profileImg} />}
                       />
-                      <Meta className="card__name" description={list.name} />
+                      <Meta className="card__name" description={list.writer} />
 
                       <Meta title={list.title} />
-                      <Meta className="card__name" description={list.city} />
+                      <Meta
+                        className="card__name"
+                        description={list.location_name}
+                      />
                       <Meta className="card__name" description={list.hashtag} />
 
                       <Meta
                         className="card__summary"
-                        description={list.description}
+                        description={list.content}
                       />
                     </Card>
                   </Link>

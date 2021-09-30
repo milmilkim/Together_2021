@@ -13,6 +13,9 @@ const Messages = ({ history }) => {
   setLayoutVisible(false);
 
   const openMessagesModal = () => {
+    if (visible) {
+      setVisible(false);
+    }
     setVisible(true);
   };
 

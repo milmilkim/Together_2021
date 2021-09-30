@@ -104,7 +104,10 @@ const ListCard = () => {
                       <Meta className="card__name" description={list.writer} />
 
                       <Meta title={list.title} />
-                      <Meta className="card__name" description={list.city} />
+                      <Meta
+                        className="card__name"
+                        description={list.location_name}
+                      />
                       <Meta className="card__name" description={list.hashtag} />
 
                       <Meta

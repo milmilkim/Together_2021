@@ -81,12 +81,9 @@ const Mypage = () => {
 
 export default Mypage;
 
-/* 
-1. TopProfile에서 버튼 누르면 Myprofile로 넘어가게하기
-2. Myprofile에서 수정버튼 누르면 Mypage로 넘어가게하기
-3. Mypage에서 수정할 내용 입력 후 확인 버튼 누르면 내용 저장후 Myprofile로 넘어가게하기
-4. Mypage에서 소개글 입력창 개선
-5. 로그인 하지 않을시에 TopProfile에서 내 프로필 버튼 누르면 Login창으로 넘어가기
+/* TODO
+1. Mypage에서 소개글 입력창 개선
+2. 디자인 약간 수정하기
 
 제가 많이 부족해서 죄송합니다...
 */

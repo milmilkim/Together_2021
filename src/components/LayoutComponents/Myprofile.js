@@ -3,14 +3,15 @@ import 'antd/dist/antd.css';
 import { Form, Button, Card, Col, Row } from 'antd';
 import './Mypage.css';
 import { Link } from 'react-router-dom';
+import Mypage from './Mypage';
 
 const Myprofile = () => {
   return (
     <>
       <Form className="nicknamewrap">
-        <div className="emailbottom">email</div>
+        <div className="emailbottom">email(예:asdfasdf@gamil.com)</div>
         <Col span={22}>
-          <span style={{ marginLeft: '4%' }}>닉네임</span>
+          <span style={{ marginLeft: '4%' }}>닉네임(예:고양이)</span>
         </Col>
       </Form>
 
@@ -60,9 +61,10 @@ const Myprofile = () => {
         type="primary"
         shape="round"
         size="large"
-        onClick={this.gotoMypage}
       >
-        수정
+        <Link to="/Mypage" components={Mypage}>
+          수정
+        </Link>
       </Button>
     </>
   );

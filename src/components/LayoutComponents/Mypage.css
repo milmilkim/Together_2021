@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 200%;
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.site-card-wrapper {
+  padding: 30px;
+}
+
+.emailbottom {
+  margin-bottom: 10px;
+  border-bottom: 2px solid #d9d9d9;
+  padding: 10px;
+  font-size: 18px;
+  padding-left: 3%;
+}
+
+.cardwrap {
+  border: 2px solid #d9d9d9;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+.subtitle {
+  width: 100%;
+  border-bottom: 1px solid #d9d9d9;
+  padding-left: 5%;
+  font-size: 18px;
+}
+
+.nickname,
+.intro-input {
+  margin-left: 3%;
+}
+.modify {
+  float: left;
+  margin-left: 2%;
+  background: #0ff;
+  color: #fff;
+  font-weight: 700;
+}
+
+.carddetail {
+  border: 2px solid #d9d9d9;
+  border-radius: 10px;
+}
+
+.emailwrap {
+  margin-bottom: 5px;
+  border: 2px solid #d9d9d9;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.nicknamewrap {
+  margin-bottom: 20px;
+  border: 2px solid #d9d9d9;
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.emaildetail {
+  padding-left: 3%;
+}
+
+.intro-input {
+  width: 100%;
+  height: 150px;
+}

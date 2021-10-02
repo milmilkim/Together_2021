@@ -10,7 +10,7 @@ const LocalSeraching = () => {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [addressObject, setAddressObject] = useState([]);
-  const page = '1'; //페이지
+  const page = '1'; //나중에 페이지 넘길 수 있게 수정하면 좋습니다...
 
   const onSearch = value => {
     setQuery(value);

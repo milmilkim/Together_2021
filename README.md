@@ -16,7 +16,7 @@
       - :page_facing_up: Contents.js - 테스트용 페이지
   - :page_facing_up: craco.config.js - antDesign 전역 변수 수정
   - :page_facing_up: state.js - Recoil 전역 state 설정
-  - :page_facing_up: package.json - 배포 시 30행 지우기
+  - :page_facing_up: package.json - 배포 시 30행 지우기..로컬 테스트 용
 
 ## API
 
@@ -31,4 +31,3 @@
 ### Admin 키
 
 > cb4385d58421f5fa4ab24a2edb6a7f2a
-

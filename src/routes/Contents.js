@@ -4,6 +4,7 @@ import LocalSeraching from 'components/LocalSearching';
 import DateForm from 'components/DateForm';
 import axios from 'axios';
 import moment from 'moment';
+import SearchLocation from './SearchLocation';
 
 const Contents = () => {
   const [message, setMessage] = useState('');
@@ -17,10 +18,11 @@ const Contents = () => {
   // }, []);
 
   return (
-    <div className="TestComponent">
+    <div className="TestComponent" style={{ padding: '10px' }}>
       <h1>연습장 </h1>
-      <LocalSeraching />
-      <Map />
+      {/* <LocalSeraching /> */}
+      <SearchLocation />
+      {/* <Map /> */}
       <div className="dummy">
         <br />
         {/* {message} */}

@@ -5,6 +5,11 @@ import './Mypage.css';
 import { Link } from 'react-router-dom';
 import Myprofile from './Myprofile';
 
+/* TODO
+
+1. Mypage.js에서 수정한내용 Myprofile.js에서 반영되게하기
+
+*/
 const Mypage = () => {
   return (
     <>
@@ -81,10 +86,3 @@ const Mypage = () => {
 };
 
 export default Mypage;
-
-/* TODO
-
-1. Mypage.js에서 수정한내용 Myprofile.js에서 반영되게하기
-
-제가 많이 부족해서 죄송합니다...
-*/

@@ -1,3 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 200%;
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .site-card-wrapper {
   padding: 30px;
 }

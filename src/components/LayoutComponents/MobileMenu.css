@@ -35,6 +35,9 @@
     display: block;
     margin-bottom: 30px !important;
   }
+  .last_card {
+    margin-bottom: 0 !important;
+  }
   .site-card-wrapper > div.ant-row {
     display: block;
   }

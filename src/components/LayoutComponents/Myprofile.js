@@ -46,7 +46,7 @@ const Myprofile = () => {
             </Col>
             <Col span={8}>
               <Card
-                className="carddetail"
+                className="carddetail last_card"
                 title="농구"
                 style={{ width: '100%', height: 200 }}
               >

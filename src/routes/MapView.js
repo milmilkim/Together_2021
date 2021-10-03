@@ -114,7 +114,7 @@ const MapView = ({ history }) => {
     <div>
       <div
         className="map"
-        style={{ width: '100$', height: '300px', zIndex: '0' }}
+        style={{ width: '100%', height: '300px', zIndex: '0' }}
         ref={container}
       />
 

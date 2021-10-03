@@ -28,7 +28,7 @@ const MobileMenu = () => {
         <NavLink to="/messages" activeStyle={activeStyle}>
           <MessageOutlined />
         </NavLink>
-        <NavLink to="/profile" activeStyle={activeStyle}>
+        <NavLink to="/myprofile" activeStyle={activeStyle}>
           <UserOutlined />
         </NavLink>
       </div>

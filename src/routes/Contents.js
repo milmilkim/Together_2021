@@ -20,7 +20,6 @@ const Contents = () => {
   return (
     <div className="TestComponent">
       <h1>연습장 </h1>
-
       {/* <LocalSeraching /> */}
       <MapView />
       {/* <Map /> */}

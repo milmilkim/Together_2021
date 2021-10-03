@@ -102,39 +102,61 @@ const ListCard = () => {
                     <Card
                       hoverable
                       style={{ width: '100%' }}
-                      cover={<img alt="example" src={list.thumbnail} />}
+                      cover={
+                        <img
+                          className={!list.IsRecruiting && 'card__img--closed'}
+                          alt={list.title}
+                          src={thumbnailSwitch(list.event)} //조건에 따라서 맞는 썸네일 이미지를 불러오겠습니다.
+                        />
+                      }
                       actions={[
                         [<UserOutlined />, list.NeedPeopleNumber],
                         [
                           <CalendarOutlined />,
-                          moment(list.EventTime).format('YYYY-MM-DD'),
+                          moment(list.EventTime).format('YY/MM/DD'), //EventTime에서 연,월,일만
                         ],
                         [
                           <FieldTimeOutlined />,
-                          moment(list.EventTime).format('hh:mm'),
+                          moment(list.EventTime).format('HH:mm'), //시, 분
                         ],
                       ]}
                     >
+                      {!list.IsRecruiting && (
+                        <Meta
+                          className="card__completed"
+                          description="🔒 모 집 완 료" //모집완료시 표시
+                        />
+                      )}
+
                       <Meta
                         className="card__category"
-                        description={list.event}
+                        description={list.event} //종목명
                       />
+
                       <Meta
                         className="card__profile"
-                        avatar={<Avatar size={60} src={list.profileImg} />}
+                        avatar={<Avatar size={60} src={list.profileImg} />} //프로필이미지
                       />
-                      <Meta className="card__name" description={list.writer} />
-
-                      <Meta title={list.title} />
                       <Meta
                         className="card__name"
-                        description={list.location_name}
+                        description={list.writer} //글쓴이 닉네임
                       />
-                      <Meta className="card__name" description={list.hashtag} />
+
+                      <Meta
+                        title={list.title} //제목
+                      />
+                      <Meta
+                        className="card__name"
+                        description={list.location_name} //지역명 ex) 서울 성동구
+                      />
+                      <Meta
+                        className="card__name"
+                        description={list.hashtag} //해시태그
+                      />
 
                       <Meta
                         className="card__summary"
-                        description={list.content}
+                        description={list.content} //내용(한줄만 css에서 자름)
                       />
                     </Card>
                   </Link>

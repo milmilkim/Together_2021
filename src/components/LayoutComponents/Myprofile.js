@@ -16,48 +16,48 @@ const Myprofile = () => {
       </Form>
 
       <div className="nicknamewrap">
-        <div className="emailbottom">소개 글</div>
+        <div className="emailbottom">자기소개</div>
         <Col span={22}>
           <span className="emaildetail" />
         </Col>
       </div>
 
-      <div className="cardwrap">
-        <h2 className="subtitle">선호 컨텐츠</h2>
+      <div className="nicknamewrap">
+        <h2 className="emailbottom">선호 컨텐츠</h2>
         <div className="site-card-wrapper">
           <Row gutter={16}>
             <Col span={8}>
               <Card
                 className="carddetail"
                 title="축구"
-                style={{ width: 300, height: 200 }}
+                style={{ width: '100%', height: 200 }}
               >
-                <img src="" alt="사진" />
+                <img src="" alt="픽토그램" />
               </Card>
             </Col>
             <Col span={8}>
               <Card
                 className="carddetail"
                 title="야구"
-                style={{ width: 300, height: 200 }}
+                style={{ width: '100%', height: 200 }}
               >
-                <img src="" alt="사진" />
+                <img src="" alt="픽토그램" />
               </Card>
             </Col>
             <Col span={8}>
               <Card
                 className="carddetail"
                 title="농구"
-                style={{ width: 300, height: 200 }}
+                style={{ width: '100%', height: 200 }}
               >
-                <img src="" alt="사진" />
+                <img src="" alt="픽토그램" />
               </Card>
             </Col>
           </Row>
         </div>
       </div>
       <Button
-        style={{ float: 'right' }}
+        style={{ float: 'right', marginBottom: '30px' }}
         type="primary"
         shape="round"
         size="large"

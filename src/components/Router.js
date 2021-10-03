@@ -8,6 +8,7 @@ import WritePost from 'routes/WritePost';
 import Post from 'routes/Post';
 import Myprofile from 'components/LayoutComponents/Myprofile';
 import Mypage from 'components/LayoutComponents/Mypage';
+import Category from 'routes/Category';
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
         <Route exact path="/myprofile" component={Myprofile} />
         <Route exact path="/mypage" component={Mypage} />
         <Route exact path="/post/:idx" component={Post} />
+        <Route exact path="/category/:category" component={Category} />
       </Switch>
     </>
   );

@@ -1,9 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import 'routes/MapView.css';
+import { Router } from 'react-router';
 
-const SearchLocation = () => {
+const MapView = ({ history }) => {
   const [locations, setLocations] = useState([]);
   const [positions, setPositions] = useState([]);
+
+  const goBack = () => {
+    history.goBack();
+  }; //뒤로가기 버튼
 
   const getData = async () => {
     await axios.get('dummy/dummyJson.json').then(res => {
@@ -19,6 +25,8 @@ const SearchLocation = () => {
             res.data[i].location_y, //위도
             res.data[i].location_x, //경도 .....
           ),
+          content: res.data[i].content, //내용
+          idx: res.data[i].idx, //아이디
         };
       }
 
@@ -61,24 +69,37 @@ const SearchLocation = () => {
     var imageSrc =
       'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
 
-    for (var i = 0; i < positions.length; i++) {
-      // 마커 이미지의 이미지 크기 입니다
+    positions.forEach(function(position) {
       var imageSize = new kakao.maps.Size(24, 35);
-
-      // 마커 이미지를 생성합니다
       var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
       // 마커를 생성합니다
       var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
-        position: positions[i].latlng, // 마커를 표시할 위치
-        title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        position: position.latlng, // 마커를 표시할 위치
+        title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image: markerImage, // 마커 이미지
       });
 
-      //마커 모양과 인포 윈도우는 추후에 수정하겠습니다.
-    }
-  };
+      var content = document.createElement('div');
+      content.className = 'customoverlay';
+      var link = document.createElement('div');
+      link.className = 'link';
+      content.appendChild(link);
+      var goPost = document.createElement('div');
+      goPost.className = 'title';
+      goPost.appendChild(document.createTextNode(position.title));
+      goPost.onclick = () => history.push(`/post/${position.idx}`);
+      link.appendChild(goPost);
+
+      // 마커에 표시할 커스텀 오버레이
+      var customOverlay = new kakao.maps.CustomOverlay({
+        content: content,
+        map: map,
+        position: marker.getPosition(),
+      });
+    });
+  }; //kakaomap
 
   useEffect(() => {
     getData();
@@ -87,7 +108,7 @@ const SearchLocation = () => {
 
   useEffect(() => {
     kakaoMap();
-  }, [positions]); //positions의 값이 바뀔때마다 재랜더링 합니다 (효울적이지는 않은 거 같은데 비동기 통신 잘 모르겠어요..)
+  }, [positions]); //positions의 값이 바뀔때마다 재랜더링 합니다
 
   return (
     <div>
@@ -109,4 +130,4 @@ const SearchLocation = () => {
   );
 };
 
-export default SearchLocation;
+export default MapView;

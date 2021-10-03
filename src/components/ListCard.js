@@ -12,7 +12,8 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 
-const ListCard = () => {
+const ListCard = ({ category }) => {
+  //종목을 받아옴
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState('');
   const [item, setItem] = useState([]);
@@ -21,7 +22,6 @@ const ListCard = () => {
   const { Meta } = Card;
 
   const thumbnailSwitch = event => {
-    var img;
     const setThumbnail = {
       //종목별 썸네일 이미지를 설정합니다. 이미지는 나중에 수정.
       축구:
@@ -33,15 +33,12 @@ const ListCard = () => {
     };
 
     //종목에 따라서 썸네일을 리턴합니다..
-    const { 조깅, 축구, 기타 } = setThumbnail;
+    var img;
 
-    if (event === '축구') {
-      img = 축구;
-    } else if (event === '조깅') {
-      img = 조깅;
+    if (setThumbnail.hasOwnProperty(event)) {
+      img = setThumbnail[event];
     } else {
-      //이외의 것
-      img = 기타;
+      img = setThumbnail.기타;
     }
 
     return img;
@@ -51,9 +48,16 @@ const ListCard = () => {
     try {
       setLoading(true);
       await axios.get('/dummy/dummyJson.json').then(res => {
-        const sortedRes = res.data.sort((a, b) => b.idx - a.idx); //정렬
-        setData(sortedRes.slice(0, 9)); //9개 자름
-        setItem(sortedRes.slice(9)); //나머지 저장
+        if (category === undefined) {
+          const sortedRes = res.data.sort((a, b) => b.idx - a.idx); //정렬
+          setData(sortedRes.slice(0, 9)); //9개 자름
+          setItem(sortedRes.slice(9)); //나머지 저장
+        } else {
+          const filteredRes = res.data.filter(cate => cate.event == category);
+          const sortedRes = filteredRes.sort((a, b) => b.idx - a.idx); //정렬
+          setData(sortedRes.slice(0, 9)); //9개 자름
+          setItem(sortedRes.slice(9)); //나머지 저장
+        }
       });
     } catch (e) {
       console.log('-_-+');
@@ -78,7 +82,7 @@ const ListCard = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ paddingTop: '20px' }}>
       {loading ? (
         <div className="card__spin">
           <Spin tip="Loading..." />
@@ -166,7 +170,7 @@ const ListCard = () => {
           </InfiniteScroll>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

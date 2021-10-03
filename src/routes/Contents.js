@@ -4,6 +4,10 @@ import LocalSeraching from 'components/LocalSearching';
 import DateForm from 'components/DateForm';
 import axios from 'axios';
 import moment from 'moment';
+<<<<<<< Updated upstream
+=======
+import MapView from './MapView';
+>>>>>>> Stashed changes
 
 const Contents = () => {
   const [message, setMessage] = useState('');
@@ -19,8 +23,14 @@ const Contents = () => {
   return (
     <div className="TestComponent">
       <h1>연습장 </h1>
+<<<<<<< Updated upstream
       <LocalSeraching />
       <Map />
+=======
+      {/* <LocalSeraching /> */}
+      <MapView />
+      {/* <Map /> */}
+>>>>>>> Stashed changes
       <div className="dummy">
         <br />
         {/* {message} */}

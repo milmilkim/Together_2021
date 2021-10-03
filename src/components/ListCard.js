@@ -20,11 +20,46 @@ const ListCard = () => {
 
   const { Meta } = Card;
 
+<<<<<<< Updated upstream
+=======
+  const thumbnailSwitch = event => {
+    var img;
+    const setThumbnail = {
+      //종목별 썸네일 이미지를 설정합니다. 이미지는 나중에 수정.
+      축구:
+        'https://image.ytn.co.kr/general/jpg/2020/0918/202009181020016953_t.jpg',
+      조깅:
+        'http://kormedi.com/wp-content/uploads/2020/03/antonioguillem-580x387.jpg',
+      기타:
+        'https://www.costco.co.kr/medias/sys_master/images/h73/h42/9863158399006.jpg',
+    };
+
+    //종목에 따라서 썸네일을 리턴합니다..
+    const { 조깅, 축구, 기타 } = setThumbnail;
+
+    if (event === '축구') {
+      img = 축구;
+    } else if (event === '조깅') {
+      img = 조깅;
+    } else {
+      //이외의 것
+      img = 기타;
+    }
+
+    return img;
+  };
+
+>>>>>>> Stashed changes
   const getData = async () => {
     try {
       setLoading(true);
+<<<<<<< Updated upstream
       await axios.get('dummy/dummyJson.json').then(res => {
         const sortedRes = res.data.sort((a, b) => b.id - a.id); //정렬
+=======
+      await axios.get('/dummy/dummyJson.json').then(res => {
+        const sortedRes = res.data.sort((a, b) => b.idx - a.idx); //정렬
+>>>>>>> Stashed changes
         setData(sortedRes.slice(0, 9)); //9개 자름
         setItem(sortedRes.slice(9)); //나머지 저장
       });
@@ -67,16 +102,24 @@ const ListCard = () => {
               </div>
             }
             hasMore={hasMore}
+<<<<<<< Updated upstream
             endMessage={
               <p style={{ textAlign: 'center' }}>
                 <b>Yay! You have seen it all</b>
               </p>
             }
+=======
+>>>>>>> Stashed changes
           >
             <Row gutter={10}>
               {data.map(list => (
+<<<<<<< Updated upstream
                 <Col xs={24} sm={12} md={8}>
                   <Link to="/contents">
+=======
+                <Col xs={12} sm={12} md={8}>
+                  <Link to={`/post/${list.idx}`}>
+>>>>>>> Stashed changes
                     <Card
                       hoverable
                       style={{ width: '100%' }}

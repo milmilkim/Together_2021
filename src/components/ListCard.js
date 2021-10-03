@@ -20,8 +20,6 @@ const ListCard = () => {
 
   const { Meta } = Card;
 
-<<<<<<< Updated upstream
-=======
   const thumbnailSwitch = event => {
     var img;
     const setThumbnail = {
@@ -49,17 +47,11 @@ const ListCard = () => {
     return img;
   };
 
->>>>>>> Stashed changes
   const getData = async () => {
     try {
       setLoading(true);
-<<<<<<< Updated upstream
-      await axios.get('dummy/dummyJson.json').then(res => {
-        const sortedRes = res.data.sort((a, b) => b.id - a.id); //정렬
-=======
       await axios.get('/dummy/dummyJson.json').then(res => {
         const sortedRes = res.data.sort((a, b) => b.idx - a.idx); //정렬
->>>>>>> Stashed changes
         setData(sortedRes.slice(0, 9)); //9개 자름
         setItem(sortedRes.slice(9)); //나머지 저장
       });
@@ -102,24 +94,11 @@ const ListCard = () => {
               </div>
             }
             hasMore={hasMore}
-<<<<<<< Updated upstream
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }
-=======
->>>>>>> Stashed changes
           >
             <Row gutter={10}>
               {data.map(list => (
-<<<<<<< Updated upstream
-                <Col xs={24} sm={12} md={8}>
-                  <Link to="/contents">
-=======
                 <Col xs={12} sm={12} md={8}>
                   <Link to={`/post/${list.idx}`}>
->>>>>>> Stashed changes
                     <Card
                       hoverable
                       style={{ width: '100%' }}

@@ -61,6 +61,7 @@ const Messages = ({ history }) => {
           <MessagesList openMessagesModal={openMessagesModal} />
           <MessagesList openMessagesModal={openMessagesModal} />
           <MessagesList openMessagesModal={openMessagesModal} />
+          {/* 여기는 나중에 리스트로 바꿔야 합니다 */}
         </div>
       </div>
       <div>

@@ -1,12 +1,11 @@
 import { useRef, useEffect, useState } from 'react';
-import Map from 'routes/Map';
 import LocalSeraching from 'components/LocalSearching';
 import DateForm from 'components/DateForm';
 import axios from 'axios';
 import moment from 'moment';
 import MapView from './MapView';
 
-const Contents = () => {
+const Contents = ({ history }) => {
   const [message, setMessage] = useState('');
 
   // const getData = async () => {
@@ -21,7 +20,7 @@ const Contents = () => {
     <div className="TestComponent">
       <h1>연습장 </h1>
       {/* <LocalSeraching /> */}
-      <MapView />
+      <MapView history={history} />
       {/* <Map /> */}
       <div className="dummy">
         <br />

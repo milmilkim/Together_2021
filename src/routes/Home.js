@@ -8,7 +8,7 @@ const Home = () => {
       <HomeCarousel />
 
       <div className="home__icons">
-        <Link to="/#">
+        <Link to="/category/축구">
           <div className="home__icons--icon">
             <img src="football.png" alt="football" />
           </div>

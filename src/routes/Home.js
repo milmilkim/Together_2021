@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import ListCard from 'components/ListCard';
 
 const Home = () => {
+
+
   return (
     <>
       <HomeCarousel />
@@ -21,9 +23,10 @@ const Home = () => {
         </div>
       </div>
 
-      <h1 style={{ fontWeight: 700, marginBottom: '20px' }}> 찾아보기 😙 </h1>
+      <h1 style={{ fontWeight: 700 }}> 찾아보기 😙 </h1>
 
       <ListCard />
+   
     </>
   );
 };

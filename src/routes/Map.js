@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
 const Map = () => {
-  //현재 위치를 중앙으로 해서 지도를 출력합니다.
   const { kakao } = window;
 
   const options = {
@@ -10,7 +9,6 @@ const Map = () => {
   };
 
   const container = useRef(null);
-  //useRef로 div map에 접근
 
   useEffect(() => {
     const map = new kakao.maps.Map(container.current, options); //지도 생성
@@ -32,7 +30,7 @@ const Map = () => {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
       var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-        message = '현재 위치를 찾을 수 없습니다';
+        message = 'geolocation을 사용할수 없어요..';
 
       displayMarker(locPosition, message);
     }
@@ -68,7 +66,7 @@ const Map = () => {
   return (
     <div
       className="map"
-      style={{ width: '100%', height: '300px', zIndex: '0' }}
+      style={{ width: '500px', height: '300px', zIndex: '0' }}
       ref={container}
     />
   );

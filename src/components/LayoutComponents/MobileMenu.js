@@ -22,7 +22,7 @@ const MobileMenu = () => {
         <NavLink to="/serach" activeStyle={activeStyle}>
           <SearchOutlined />
         </NavLink>
-        <NavLink to="/writepost" activeStyle={activeStyle}>
+        <NavLink to="/add" activeStyle={activeStyle}>
           <PlusSquareOutlined />
         </NavLink>
         <NavLink to="/messages" activeStyle={activeStyle}>

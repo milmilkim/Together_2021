@@ -5,4 +5,9 @@ const layoutState = atom({
   default: true,
 });
 
-export { layoutState };
+const loginState = atom({
+  key: 'login',
+  default: false,
+});
+
+export { layoutState, loginState };

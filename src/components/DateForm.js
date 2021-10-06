@@ -4,7 +4,7 @@ const DateForm = () => {
   function onChange(value, dateString) {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
-    console.log(value.toString());
+    console.log(value);
   }
 
   function onOk(value) {

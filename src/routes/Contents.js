@@ -6,28 +6,20 @@ import moment from 'moment';
 import MapView from './MapView';
 
 const Contents = ({ history }) => {
-  const [message, setMessage] = useState('');
-
-  // const getData = async () => {
-  //   await axios.get('api/hello').then(response => setMessage(response.data));
-  // }; //localhost:8080 서버 연동 테스트
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  const [message, setMessage] = useState([]);
 
   return (
     <div className="TestComponent">
+      {localStorage.getItem('token') ? <>로그인중~!</> : <>로그아웃중~!</>}
       <h1>연습장 </h1>
       {/* <LocalSeraching /> */}
       <MapView history={history} />
-      {/* <Map /> */}
       <div className="dummy">
         <br />
-        {/* {message} */}
+
         {moment('2021-09-30T18:01:28.198913800').format('YY/DD')}
         {/* moment 라이브러리 테스트 */}
-        <DateForm />
+        {/* <DateForm /> */}
         <br />
       </div>
     </div>

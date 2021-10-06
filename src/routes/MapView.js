@@ -1,36 +1,36 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import 'routes/MapView.css';
-import { Router } from 'react-router';
 
 const MapView = ({ history }) => {
   const [locations, setLocations] = useState([]);
   const [positions, setPositions] = useState([]);
+  const [page, setPage] = useState(0);
 
   const goBack = () => {
     history.goBack();
   }; //뒤로가기 버튼
 
   const getData = async () => {
-    await axios.get('dummy/dummyJson.json').then(res => {
-      const data = res.data;
+    await axios.get(`/api/home?page=${page}`).then(res => {
+      const data = res.data.content;
       setLocations(data);
 
       const tempArray = []; //새 배열을 만듭니다.
 
       for (var i = 0; i < data.length; i++) {
         tempArray[i] = {
-          title: res.data[i].title,
+          title: data[i].title,
           latlng: new kakao.maps.LatLng(
-            res.data[i].location_y, //위도
-            res.data[i].location_x, //경도 .....
+            data[i].locationY, //위도
+            data[i].locationX, //경도 .....
           ),
-          content: res.data[i].content, //내용
-          idx: res.data[i].idx, //아이디
+          content: data[i].content, //내용
+          idx: data[i].id, //아이디
         };
       }
 
-      setPositions(tempArray);
+      setPositions(positions.concat(tempArray));
     });
   };
 
@@ -120,11 +120,11 @@ const MapView = ({ history }) => {
 
       <div>
         (지역이 다를 땐 축소를 많이 하면 마커가 보입니다.) 우선 현재 위치를
-        불러와 중심 좌표로 설정한 후,
+        불러와 중심 좌표로 설정한 후, 목록에서 위도 경도 가져와서 뿌려줌
         <br />
-        데이터베이스 전체의 게시물을 읽어와서 그곳의 좌표를 불러와 지도의 마커로
-        뿌려줍니다. <br />
-        값이 엄청 많으면 문제가 될 거 같지만..
+        현재는 최신순으로, 모집중 여부 관계 없이 12개만 보여주는데 거리순으로
+        정렬해야 n개 ..이런식으로 해야 하지 않을까..?? 하지만 시간이 없으니
+        구현만 해놓는 것으로 =_=
       </div>
     </div>
   );

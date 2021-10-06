@@ -13,6 +13,11 @@ const Home = () => {
             <img src="football.png" alt="football" />
           </div>
         </Link>
+        <Link to="/category/야구">
+          <div className="home__icons--icon">
+            <img src="baseball.png" alt="baseball" />
+          </div>
+        </Link>
         <div className="home__icons--icon">
           <img src="badminton.png" alt="badminton" />
         </div>
@@ -23,7 +28,7 @@ const Home = () => {
 
       <h1 style={{ fontWeight: 700, marginBottom: '20px' }}> 찾아보기 😙 </h1>
 
-      <ListCard />
+      <ListCard category="all" email="email" />
     </>
   );
 };

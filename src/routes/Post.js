@@ -3,6 +3,8 @@ import axios from 'axios';
 import Map from 'components/Map';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import { Modal, Button } from 'antd';
+import UserProfile from 'routes/UserProfile';
 
 const Post = ({ match, history }) => {
   const { idx } = match.params;
@@ -12,13 +14,25 @@ const Post = ({ match, history }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRecruiting, setIsRecruiting] = useState('');
 
+  const [isModalVisible, setIsModalVisible] = useState(false); //모달 표시
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  //모달관련함수
+
   const {
     writer,
     title,
     content,
     locationX,
     locationY,
-    needPeopleNumber,
+    needPeopleNum,
     eventTime,
     event,
     addressName,
@@ -36,10 +50,6 @@ const Post = ({ match, history }) => {
     });
   };
 
-  const goBack = () => {
-    history.goBack();
-  }; //뒤로가기 버튼
-
   const postDelete = () => {
     Swal.fire({
       title: '삭제',
@@ -54,7 +64,7 @@ const Post = ({ match, history }) => {
       if (result.isConfirmed) {
         axios.put(`/api/board/posts/${idx}/isDelete`);
         Swal.fire('삭제 완료!', '게시글을 삭제했습니다', 'success');
-        goBack();
+        history.push('/');
       }
     });
   };
@@ -100,18 +110,42 @@ const Post = ({ match, history }) => {
       {!isLoading ? (
         <div className="post">
           <div style={{ paddingTop: '20px' }}>
-            {!!addressName && <Map lat={locationY} lng={locationX} />}
+            {addressName !== '　' && <Map lat={locationY} lng={locationX} />}
             <li>주소 있을 때만 지도 출력!</li>
             <li>아이디: {idx}</li>
-            <Link to={`/userprofile/${email}`}>
-              {' '}
-              <li>작성자: {writer}</li>{' '}
-            </Link>
+            <li
+              style={{ cursor: 'pointer' }}
+              onClick={() => setIsModalVisible(true)}
+            >
+              작성자: {writer}
+            </li>
+            {isModalVisible && (
+              <Modal
+                title={`${writer} 님의 프로필`}
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <UserProfile
+                  email={email}
+                  handleCancel={handleCancel}
+                  handleOk={handleOk}
+                  isModalVisible={isModalVisible}
+                />
+              </Modal>
+            )}
             <li>제목: {title}</li>
-            <li>내용: {content}</li>
+            <li>
+              내용:{' '}
+              {content.split('\n').map(line => (
+                <>
+                  {line} <br />
+                </>
+              ))}{' '}
+            </li>
             <li>위도: {locationY}</li>
             <li>경도: {locationX}</li>
-            <li>사람수: {needPeopleNumber}</li>
+            <li>사람수: {needPeopleNum}</li>
             <li>날짜: {eventTime}</li>
             <li>종목: {event}</li>
             <li>주소: {addressName}</li>
@@ -136,7 +170,7 @@ const Post = ({ match, history }) => {
               </>
             )}
             <br /> <br />
-            <button onClick={goBack}>뒤로가기</button>
+            <button onClick={() => history.push('/')}>뒤로가기</button>
             👈 항상 표시
             <br />
           </div>

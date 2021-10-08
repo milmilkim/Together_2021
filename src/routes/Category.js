@@ -7,7 +7,7 @@ const Category = ({ match }) => {
 
   return (
     <>
-      <ListCard category={category} />
+      <ListCard getApi={'/api/board/search/' + category} />
     </>
   );
 };

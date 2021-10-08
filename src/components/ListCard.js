@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 
-const ListCard = ({ category, email }) => {
+const ListCard = ({ getApi, keyword }) => {
   //종목을 받아옴
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState('');
@@ -24,6 +24,7 @@ const ListCard = ({ category, email }) => {
   const thumbnailSwitch = event => {
     const setThumbnail = {
       //종목별 썸네일 이미지를 설정합니다. 이미지는 나중에 수정.
+      //이건
       축구:
         'https://image.ytn.co.kr/general/jpg/2020/0918/202009181020016953_t.jpg',
       조깅:
@@ -53,15 +54,8 @@ const ListCard = ({ category, email }) => {
     try {
       setLoading(true);
 
-      await axios.get(`/api/home?page=${page}`).then(res => {
-        if (category == 'all') {
-          setData(data.concat(res.data.content));
-        } else {
-          const filteredRes = res.data.content.filter(
-            cate => cate.event == category,
-          );
-          setData(data.concat(filteredRes));
-        }
+      await axios.get(`${getApi}?page=${page}`).then(res => {
+        setData(data.concat(res.data.content));
         setPage(page + 1);
       });
     } catch (e) {
@@ -73,7 +67,9 @@ const ListCard = ({ category, email }) => {
 
   useEffect(() => {
     moreData();
-  }, []);
+  }, [getApi]);
+
+  useEffect(() => {}, [getApi]);
 
   return (
     <div style={{ paddingTop: '20px' }}>
@@ -87,14 +83,7 @@ const ListCard = ({ category, email }) => {
           <Row gutter={10}>
             {data.map(list => (
               <Col xs={12} sm={12} md={8}>
-                <Link
-                  to={{
-                    pathname: `/post/${list.id}`,
-                    state: {
-                      email: { email },
-                    },
-                  }}
-                >
+                <Link to={`/post/${list.id}`}>
                   <Card
                     hoverable
                     style={{ width: '100%' }}
@@ -106,16 +95,14 @@ const ListCard = ({ category, email }) => {
                       />
                     }
                     actions={[
-                      [<UserOutlined />, '필요인원'],
+                      [<UserOutlined />, list.needPeopleNum],
                       [
                         <CalendarOutlined />,
-                        '날짜',
-                        // moment(list.EventTime).format('YY/MM/DD'), //EventTime에서 연,월,일만
+                        moment(list.eventTime).format('YY/MM/DD'), //EventTime에서 연,월,일만
                       ],
                       [
                         <FieldTimeOutlined />,
-                        '시간',
-                        // moment(list.EventTime).format('HH:mm'), //시, 분
+                        moment(list.eventTime).format('HH:mm'), //시, 분
                       ],
                     ]}
                   >
@@ -133,12 +120,7 @@ const ListCard = ({ category, email }) => {
 
                     <Meta
                       className="card__profile"
-                      avatar={
-                        <Avatar
-                          size={60}
-                          src="https://newsimg.hankookilbo.com/cms/articlerelease/2019/04/29/201904291390027161_3.jpg"
-                        />
-                      } //프로필이미지 구현 예정?
+                      avatar={<Avatar size={60} src={list.userPicture} />} //프로필이미지 구현 예정?
                     />
                     <Meta
                       className="card__name"

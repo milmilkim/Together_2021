@@ -3,11 +3,11 @@ import {
   PlusSquareOutlined,
   MessageOutlined,
   LoginOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 
 import Navigation from 'components/Navigation';
 import { Badge } from 'antd';
-import SearchBox from 'components/LayoutComponents/SearchBox';
 import TopProfile from 'components/LayoutComponents/TopProfile';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -30,7 +30,9 @@ const LayoutHeader = ({ email }) => {
             </div>
             <div className="topMenu">
               <Space size="middle">
-                <SearchBox />
+                <Link to="/searchpost">
+                  <SearchOutlined style={{ fontSize: '30px' }} />
+                </Link>
 
                 {email !== '' ? (
                   <>

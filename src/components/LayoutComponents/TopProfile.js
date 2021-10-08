@@ -2,15 +2,22 @@ import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
-import Myprofile from './Myprofile';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const TopProfile = ({ email }) => {
+  const [profile, setProfile] = useState('');
+
+  const getProfileImg = async email => {
+    await axios.get(`/api/user/userInfo/${email}`).then(res => {
+      setProfile(res.data);
+    });
+  };
+
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <Link to={`/myprofile/${email}`} components={Myprofile}>
-          내 프로필
-        </Link>
+        <Link to={`/myprofile/${email}`}>내 프로필</Link>
       </Menu.Item>
       <Menu.Item key="1">설정</Menu.Item>
       <Menu.Divider />
@@ -19,6 +26,10 @@ const TopProfile = ({ email }) => {
       </Menu.Item>
     </Menu>
   );
+
+  useEffect(() => {
+    getProfileImg(email);
+  }, []);
 
   return (
     <>
@@ -29,7 +40,11 @@ const TopProfile = ({ email }) => {
         trigger={['click']}
       >
         <span className="avatar-item">
-          <Avatar shape="circle" icon={<UserOutlined />} />
+          <Avatar
+            shape="circle"
+            icon={<UserOutlined />}
+            src={profile.picture}
+          />
         </span>
       </Dropdown>
     </>

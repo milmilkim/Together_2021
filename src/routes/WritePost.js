@@ -21,16 +21,16 @@ import Swal from 'sweetalert2';
 
 const WritePost = ({ history }) => {
   const [post, setPost] = useState({
-    addressName: '',
+    addressName: '　',
     content: '',
     event: '',
     eventTime: '',
     locationX: '',
     locationY: '',
     needPeopleNum: 1,
-    placeName: '',
-    region1Depth: '',
-    region2Depth: '',
+    placeName: '　',
+    region1Depth: '　',
+    region2Depth: '　',
     title: '',
   }); //게시글
 
@@ -114,7 +114,7 @@ const WritePost = ({ history }) => {
         title: 'Oops...',
         text: '현재 위치를 불러올 수 없습니다!',
       });
-    } //접속 위치가 얻어지지 않으면
+    } //
   };
 
   const getAddress = async (lat, lng) => {

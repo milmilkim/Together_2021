@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import 'routes/MapView.css';
+import { baseApiUrl } from 'components/Options';
 
 const MapView = ({ history }) => {
   const [locations, setLocations] = useState([]);
@@ -12,7 +13,7 @@ const MapView = ({ history }) => {
   }; //뒤로가기 버튼
 
   const getData = async () => {
-    await axios.get('/api/board/all').then(res => {
+    await axios.get(`${baseApiUrl}/api/board/all`).then(res => {
       const data = res.data;
       setLocations(data);
 
@@ -21,6 +22,7 @@ const MapView = ({ history }) => {
       for (var i = 0; i < data.length; i++) {
         tempArray[i] = {
           title: data[i].title,
+          event: data[i].event,
           latlng: new kakao.maps.LatLng(
             data[i].locationY, //위도
             data[i].locationX, //경도 .....
@@ -83,9 +85,13 @@ const MapView = ({ history }) => {
       var link = document.createElement('div');
       link.className = 'link';
       content.appendChild(link);
+      content.onclick = () => history.push(`/post/${position.idx}`);
+
       var goPost = document.createElement('div');
       goPost.className = 'title';
+      goPost.appendChild(document.createTextNode('[' + position.event + ']'));
       goPost.appendChild(document.createTextNode(position.title));
+
       goPost.onclick = () => history.push(`/post/${position.idx}`);
       link.appendChild(goPost);
 
@@ -114,12 +120,6 @@ const MapView = ({ history }) => {
         style={{ width: '100%', height: '80vh', zIndex: '0' }}
         ref={container}
       />
-
-      <div>
-        (지역이 다를 땐 축소를 많이 하면 마커가 보입니다.) 우선 현재 위치를
-        불러와 중심 좌표로 설정한 후, 목록에서 위도 경도 가져와서 뿌려줌
-        <br />
-      </div>
     </div>
   );
 };

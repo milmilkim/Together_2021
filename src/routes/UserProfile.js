@@ -4,12 +4,13 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { baseApiUrl } from 'components/Options';
 
 const UserProfile = ({ email }) => {
   const [profile, setProfile] = useState('');
 
   const getData = async () => {
-    await axios.get(`/api/user/userInfo/${email}`).then(res => {
+    await axios.get(`${baseApiUrl}/api/user/userInfo/${email}`).then(res => {
       setProfile(res.data);
       console.log(res.data);
     });

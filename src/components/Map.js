@@ -1,13 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 
 const Map = ({ lat, lng }) => {
-  //현재 위치를 중앙으로 해서 지도를 출력합니다.
   const { kakao } = window;
   console.log(lat);
   console.log(lng);
 
   const options = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667), //중심위치 초기 설정(카카오)
+    center: new kakao.maps.LatLng(lat, lng), //중심위치 초기 설정(카카오)
     level: 3,
   };
 
@@ -36,7 +35,7 @@ const Map = ({ lat, lng }) => {
   return (
     <div
       className="map"
-      style={{ width: '100%', height: '300px', zIndex: '0' }}
+      style={{ width: '100%', height: '400px', zIndex: '0' }}
       ref={container}
     />
   );

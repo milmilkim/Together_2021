@@ -1,6 +1,7 @@
 import HomeCarousel from 'components/HomeCarousel';
 import { Link } from 'react-router-dom';
 import ListCard from 'components/ListCard';
+import { baseApiUrl } from 'components/Options';
 
 const Home = () => {
   return (
@@ -28,7 +29,7 @@ const Home = () => {
 
       <h1 style={{ fontWeight: 700, marginBottom: '20px' }}> 찾아보기 😙 </h1>
 
-      <ListCard getApi={'/api/board'} />
+      <ListCard getApi={`${baseApiUrl}/api/board`} />
     </>
   );
 };

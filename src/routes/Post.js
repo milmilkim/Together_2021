@@ -3,8 +3,11 @@ import axios from 'axios';
 import Map from 'components/Map';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import { Modal, Button } from 'antd';
+import { Modal, Button, Avatar } from 'antd';
 import UserProfile from 'routes/UserProfile';
+import 'routes/Post.css';
+import moment from 'moment';
+import { baseApiUrl } from 'components/Options';
 
 const Post = ({ match, history }) => {
   const { idx } = match.params;
@@ -40,12 +43,13 @@ const Post = ({ match, history }) => {
     mine,
     recruiting,
     email,
+    userPicture,
   } = post;
 
   const getEmail = async () => {
-    await axios.get('/api/loginedUser').then(res => {
+    await axios.get(`${baseApiUrl}/api/loginedUser`).then(res => {
       if (res.data === '') {
-        history.push('/LoginPage');
+        // history.push('/LoginPage');
       }
     });
   };
@@ -62,9 +66,10 @@ const Post = ({ match, history }) => {
       confirmButtonText: '삭제',
     }).then(result => {
       if (result.isConfirmed) {
-        axios.put(`/api/board/posts/${idx}/isDelete`);
-        Swal.fire('삭제 완료!', '게시글을 삭제했습니다', 'success');
-        history.push('/');
+        axios.put(`${baseApiUrl}/api/board/posts/${idx}/isDelete`).then(res => {
+          Swal.fire('삭제 완료!', '게시글을 삭제했습니다', 'success');
+          history.push('/');
+        });
       }
     });
   };
@@ -80,10 +85,16 @@ const Post = ({ match, history }) => {
       cancelButtonColor: '#d33',
       confirmButtonText: '확인',
     }).then(result => {
-      if (result.isConfirmed) {
-        axios.put(`/api/board/posts/${idx}/endRecruiting`);
-        setIsRecruiting(false);
-        Swal.fire('모집 완료!', '요청을 완료했습니다', 'success');
+      try {
+        if (result.isConfirmed) {
+          axios.put(
+            `https://www.healthtogether.kro.kr/api/board/posts/${idx}/endRecruiting`,
+          );
+          setIsRecruiting(false);
+          Swal.fire('모집 완료!', '요청을 완료했습니다', 'success');
+        }
+      } catch (error) {
+        Swal.fire('Oops...', '요청에 실패했습니다', 'error');
       }
     });
   };
@@ -91,11 +102,16 @@ const Post = ({ match, history }) => {
   const getData = async () => {
     try {
       setIsLoading(true);
-      await axios.get(`/api/board/posts/${idx}`).then(res => {
-        setPost(res.data);
-      });
+      // await axios.get(`/api/board/posts/${idx}`).then(res => {
+      await axios
+        // .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
+        .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
+        .then(res => {
+          setPost(res.data);
+          console.log(res);
+        });
     } catch (e) {
-      console.log(e);
+      console.log('게시글을 불러오지 못했습니다.');
     }
     setIsLoading(false);
   };
@@ -108,72 +124,78 @@ const Post = ({ match, history }) => {
   return (
     <>
       {!isLoading ? (
-        <div className="post">
-          <div style={{ paddingTop: '20px' }}>
-            {addressName !== '　' && <Map lat={locationY} lng={locationX} />}
-            <li>주소 있을 때만 지도 출력!</li>
-            <li>아이디: {idx}</li>
-            <li
-              style={{ cursor: 'pointer' }}
+        <div className="post" style={{ paddingTop: '30px' }}>
+          <div className="postHeader">
+            <div className="postHeader__event">{event}</div>
+            <div className="postHeader__title">{title}</div>
+            <div
               onClick={() => setIsModalVisible(true)}
+              className="postHeader__writer"
             >
-              작성자: {writer}
-            </li>
-            {isModalVisible && (
-              <Modal
-                title={`${writer} 님의 프로필`}
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-              >
-                <UserProfile
-                  email={email}
-                  handleCancel={handleCancel}
-                  handleOk={handleOk}
-                  isModalVisible={isModalVisible}
-                />
-              </Modal>
-            )}
-            <li>제목: {title}</li>
-            <li>
-              내용:{' '}
-              {content.split('\n').map(line => (
-                <>
-                  {line} <br />
-                </>
-              ))}{' '}
-            </li>
-            <li>위도: {locationY}</li>
-            <li>경도: {locationX}</li>
-            <li>사람수: {needPeopleNum}</li>
-            <li>날짜: {eventTime}</li>
-            <li>종목: {event}</li>
-            <li>주소: {addressName}</li>
-            <li>장소이름: {placeName} </li>
-            {recruiting ? <li>모집중</li> : <li>모집완료</li>}
-            {mine ? <li>내가 쓴 글임</li> : <li>남이 쓴 글임</li>}
-            <br />
-            <br />
-            {!mine && recruiting && <button>참가신청</button>}
-            👈 내가 쓴 글이 아니고 모집중이면 표시 <br />
-            {mine && (
-              <>
-                {recruiting && <button onClick={postClose}>모집마감</button>}
-                👈 내가 쓴 글인데 모집중이면 표시
-                <br />
-                <Link to={`/update/${idx}`}>
-                  {' '}
-                  <button>수정</button>
-                </Link>
-                <button onClick={postDelete}>삭제</button>
-                👈 내가 쓴 글이면 표시
-              </>
-            )}
-            <br /> <br />
-            <button onClick={() => history.push('/')}>뒤로가기</button>
-            👈 항상 표시
-            <br />
+              <Avatar src={userPicture} alt={writer} />
+              <span>{writer}</span>
+            </div>
           </div>
+          <div className="contentWrap">
+            <div className="mapArea">
+              {!!addressName ? (
+                <Map lat={locationY} lng={locationX} />
+              ) : (
+                <>지도 X</>
+              )}
+            </div>
+            <div className="info">
+              <div className="place">{placeName}</div>
+              <div className="label">사람수</div>
+              <div className="detail">{needPeopleNum}</div>
+              <div className="label">날짜</div>
+              <div className="detail">
+                {moment(eventTime).format('YYYY년 MM월 DD일')}
+              </div>
+              <div className="label">시간</div>
+              <div className="detail">{moment(eventTime).format('HH:mm')}</div>
+              {!!addressName && <div className="label">주소</div>}
+              <div className="detail">{addressName}</div>
+              <div className="recruiting">
+                {recruiting ? (
+                  <div className="true">모집중</div>
+                ) : (
+                  <div className="false">모집완료</div>
+                )}
+              </div>
+            </div>
+          </div>
+          {/* <li>아이디: {idx}</li> */}
+          {isModalVisible && (
+            <Modal
+              title={`${writer} 님의 프로필`}
+              visible={isModalVisible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              footer={[]}
+            >
+              <UserProfile email={email} />
+            </Modal>
+          )}
+          <div className="description">
+            <div className="text">{content}</div>
+          </div>
+          <br />
+          <br />
+          {!mine && recruiting && <Button>참가신청</Button>}
+          {!mine && !recruiting && <Button disabled>참가신청</Button>}
+          {!mine && (
+            <>
+              {mine && recruiting && (
+                <Button onClick={postClose}>모집마감</Button>
+              )}
+              <Link to={`/update/${idx}`}>
+                <Button>수정</Button>
+              </Link>
+              <Button onClick={postDelete}>삭제</Button>
+            </>
+          )}
+          <Button onClick={() => history.push('/')}>뒤로가기</Button>
         </div>
       ) : (
         <div>loading....</div>

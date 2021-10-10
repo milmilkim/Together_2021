@@ -17,7 +17,7 @@ const AppRouter = () => {
     <>
       <ScrollToTop />
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route exact path="/" exact component={Home} />
         <Route exact path="/contents" component={Contents} />
         <Route exact path="/loginpage" component={LoginPage} />
         <Route exact path="/writepost" component={WritePost} />

@@ -54,10 +54,17 @@ const ListCard = ({ getApi, keyword }) => {
     try {
       setLoading(true);
 
-      await axios.get(`${getApi}?page=${page}`).then(res => {
-        setData(data.concat(res.data.content));
-        setPage(page + 1);
-      });
+      await axios
+        .get(`${getApi}?page=${page}`)
+        // await axios.get(`https://healthtogether.kro.kr/api/board`).then(res => {
+        // await axios
+        // .get(`https://www.healthtogether.kro.kr/api/board?page=${page}`)
+        .then(res => {
+          console.log(res);
+          console.log(data);
+          setData(data.concat(res.data.content));
+          setPage(page + 1);
+        });
     } catch (e) {
       console.log(e);
     }

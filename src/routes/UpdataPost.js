@@ -18,6 +18,7 @@ import axios from 'axios';
 import LocalSeraching from 'components/LocalSearching';
 import 'routes/WritePost.css';
 import Swal from 'sweetalert2';
+import { baseApiUrl } from 'components/Options';
 
 const UpdatePost = ({ history, match }) => {
   //글쓰기 페이지+불러온 데이터.
@@ -44,7 +45,7 @@ const UpdatePost = ({ history, match }) => {
 
   const getData = async () => {
     try {
-      await axios.get(`/api/board/posts/${idx}`).then(res => {
+      await axios.get(`${baseApiUrl}/api/board/posts/${idx}`).then(res => {
         // setPost(res.data);
         form.setFieldsValue({
           title: res.data.title,
@@ -79,7 +80,7 @@ const UpdatePost = ({ history, match }) => {
       cancelButtonText: '취소',
     }).then(result => {
       if (result.isConfirmed) {
-        axios.put(`/api/board/posts/${idx}`, post).then(() => {
+        axios.put(`${baseApiUrl}/api/board/posts/${idx}`, post).then(() => {
           Swal.fire('수정 완료!', '', 'success');
           history.push(`/post/${idx}`);
         });

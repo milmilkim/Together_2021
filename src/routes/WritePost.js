@@ -50,10 +50,20 @@ const WritePost = ({ history }) => {
       cancelButtonText: '취소',
     }).then(result => {
       if (result.isConfirmed) {
-        axios.post('/api/board/posts', post).then(() => {
-          Swal.fire('저장 완료!', '', 'success');
-          history.push('/');
-        });
+        try {
+          axios
+            .post(
+              // 'http://ec2-54-180-175-20.ap-northeast-2.compute.amazonaws.com:8080/api/board/posts',
+              'https://www.healthtogether.kro.kr/api/board/posts',
+              post,
+            )
+            .then(() => {
+              Swal.fire('저장 완료!', '', 'success');
+              history.push('/');
+            });
+        } catch (error) {
+          console.log('에러');
+        }
       }
     });
   }; //전송하고 홈으로~

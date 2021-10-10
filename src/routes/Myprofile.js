@@ -90,7 +90,8 @@ const Myprofile = ({ match }) => {
 
   return (
     <>
-      {email !== '' ? (
+      {/* {email !== '' ? ( */}
+      {true ? (
         <>
           <Avatar
             size={128}

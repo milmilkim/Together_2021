@@ -3,6 +3,7 @@ import ListCard from 'components/ListCard';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { baseApiUrl } from 'components/Options';
 
 const SearchPost = () => {
   const { Search } = Input;
@@ -12,7 +13,7 @@ const SearchPost = () => {
   const [loading, setLoading] = useState('');
 
   const highlightedText = (text, query) => {
-    if (query !== '' && text.includes(query)) {
+    if (query !== '' && text !== null && text.includes(query)) {
       const parts = text.split(new RegExp(`(${query})`, 'gi'));
 
       return (
@@ -40,10 +41,12 @@ const SearchPost = () => {
     try {
       setLoading(true);
 
-      await axios.get(`/api/board/search/${keyword}?page=${page}`).then(res => {
-        setData(res.data.content);
-        console.log(res);
-      });
+      await axios
+        .get(`${baseApiUrl}/api/board/search/${keyword}?page=${page}`)
+        .then(res => {
+          setData(res.data.content);
+          console.log(res);
+        });
     } catch (e) {
       console.log(e);
     }

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { layoutState, loginState } from 'state';
+import { baseApiUrl } from 'components/Options';
 
 const Layout = ({}) => {
   const { Content } = AntLayout;
@@ -16,7 +17,8 @@ const Layout = ({}) => {
   const [email, setEmail] = useState('');
 
   const getEmail = async () => {
-    await axios.get('/api/loginedUser').then(res => {
+    await axios.get(`${baseApiUrl}/api/loginedUser`).then(res => {
+      console.log(res);
       setEmail(res.data);
     });
   };

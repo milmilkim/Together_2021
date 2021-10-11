@@ -18,6 +18,7 @@ import axios from 'axios';
 import LocalSeraching from 'components/LocalSearching';
 import 'routes/WritePost.css';
 import Swal from 'sweetalert2';
+import { selectEvent } from 'components/Options';
 
 const WritePost = ({ history }) => {
   const [post, setPost] = useState({
@@ -248,10 +249,7 @@ const WritePost = ({ history }) => {
               placeholder="종목"
               onChange={onChangeEvent}
             >
-              <Select.Option value="축구">축구</Select.Option>
-              <Select.Option value="야구">야구</Select.Option>
-              <Select.Option value="농구">농구</Select.Option>
-              <Select.Option value="기타">기타</Select.Option>
+              {selectEvent()}
             </Select>
           </Form.Item>
           <Form.Item>

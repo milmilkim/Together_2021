@@ -1,7 +1,10 @@
 .mapArea {
   width: 100%;
   height: 400px;
-  background-color: gray;
+  background-color: var(--color-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .postHeader {
@@ -87,4 +90,27 @@
   font-size: 3em;
   font-family: Georgia;
   color: #bcbcbc;
+}
+
+.postButtonWraper {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 반응형*/
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 768px) {
+  .contentWrap {
+    display: block;
+  }
+
+  .mapArea {
+    width: 100%;
+  }
+  .info {
+    width: 100%;
+  }
 }

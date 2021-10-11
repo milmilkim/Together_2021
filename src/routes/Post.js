@@ -141,7 +141,7 @@ const Post = ({ match, history }) => {
               {!!addressName ? (
                 <Map lat={locationY} lng={locationX} />
               ) : (
-                <>지도 X</>
+                <>🙄위치 정보가 없습니다</>
               )}
             </div>
             <div className="info">
@@ -182,20 +182,22 @@ const Post = ({ match, history }) => {
           </div>
           <br />
           <br />
-          {!mine && recruiting && <Button>참가신청</Button>}
-          {!mine && !recruiting && <Button disabled>참가신청</Button>}
-          {!mine && (
-            <>
-              {mine && recruiting && (
-                <Button onClick={postClose}>모집마감</Button>
-              )}
-              <Link to={`/update/${idx}`}>
-                <Button>수정</Button>
-              </Link>
-              <Button onClick={postDelete}>삭제</Button>
-            </>
-          )}
-          <Button onClick={() => history.push('/')}>뒤로가기</Button>
+          <div className="postButtonWraper">
+            {!mine && recruiting && <Button>참가신청</Button>}
+            {!mine && !recruiting && <Button disabled>참가신청</Button>}
+            {!mine && (
+              <>
+                {mine && recruiting && (
+                  <Button onClick={postClose}>모집마감</Button>
+                )}
+                <Link to={`/update/${idx}`}>
+                  <Button>수정</Button>
+                </Link>
+                <Button onClick={postDelete}>삭제</Button>
+              </>
+            )}
+            <Button onClick={() => history.push('/')}>뒤로가기</Button>
+          </div>
         </div>
       ) : (
         <div>loading....</div>

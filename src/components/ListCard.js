@@ -11,6 +11,7 @@ import {
   FieldTimeOutlined,
 } from '@ant-design/icons';
 import moment from 'moment';
+import { setThumbnail } from 'components/Options';
 
 const ListCard = ({ getApi, keyword }) => {
   //종목을 받아옴
@@ -22,23 +23,8 @@ const ListCard = ({ getApi, keyword }) => {
   const { Meta } = Card;
 
   const thumbnailSwitch = event => {
-    const setThumbnail = {
-      //종목별 썸네일 이미지를 설정합니다. 이미지는 나중에 수정.
-      //이건
-      축구:
-        'https://image.ytn.co.kr/general/jpg/2020/0918/202009181020016953_t.jpg',
-      조깅:
-        'http://kormedi.com/wp-content/uploads/2020/03/antonioguillem-580x387.jpg',
-      야구:
-        'https://news.hmgjournal.com/images_n/contents/191204_baseball_01.png',
-      야구야구:
-        'https://news.hmgjournal.com/images_n/contents/191204_baseball_01.png',
-
-      기타:
-        'https://www.costco.co.kr/medias/sys_master/images/h73/h42/9863158399006.jpg',
-    };
-
     //종목에 따라서 썸네일을 리턴합니다..
+
     var img;
 
     if (setThumbnail.hasOwnProperty(event)) {
@@ -75,8 +61,6 @@ const ListCard = ({ getApi, keyword }) => {
   useEffect(() => {
     moreData();
   }, [getApi]);
-
-  useEffect(() => {}, [getApi]);
 
   return (
     <div style={{ paddingTop: '20px' }}>

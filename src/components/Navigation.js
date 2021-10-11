@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu, Dropdown } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { setCategory } from 'components/Options';
 
 const { SubMenu } = Menu;
 
@@ -15,10 +16,7 @@ const menu = (
         <Link to="/contents">지도에서 찾기</Link>
       </Menu.Item>
     </Menu.ItemGroup>
-    <SubMenu title="종목별로 찾기" key="5">
-      <Menu.Item key="3">축구</Menu.Item>
-      <Menu.Item key="4">어쩌고저쩌고</Menu.Item>
-    </SubMenu>
+    {setCategory()}
   </Menu>
 );
 

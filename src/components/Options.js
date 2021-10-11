@@ -19,12 +19,15 @@ const setThumbnail = {
 const setCategory = () => {
   //상단 네비게이션에 포홤될 종목임
   return (
-    <SubMenu title="종목별로 찾기" key="2">
-      <Link to="/category/축구">
-        <Menu.Item key="3">축구</Menu.Item>
-      </Link>
-      <Menu.Item key="4">어쩌고저쩌고</Menu.Item>
-    </SubMenu>
+    <>
+      <Menu.Item key="3">
+        <Link to="/category/축구">축구 </Link>
+      </Menu.Item>
+
+      <Menu.Item key="4">
+        <Link to="/category/축구">어쩌고저쩌고 </Link>
+      </Menu.Item>
+    </>
   );
 };
 

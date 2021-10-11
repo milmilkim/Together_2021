@@ -26,7 +26,9 @@ const LayoutHeader = ({ email }) => {
         <Header>
           <div className="header_wrap">
             <div className="logo">
-              <Link to="/">함께, 운동</Link>
+              <Link to="/">
+                <img src="logo.png" alt="함께, 운동" />
+              </Link>
             </div>
             <div className="topMenu">
               <Space size="middle">

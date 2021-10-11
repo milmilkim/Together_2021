@@ -12,9 +12,8 @@ const setThumbnail = {
   조깅:
     'http://kormedi.com/wp-content/uploads/2020/03/antonioguillem-580x387.jpg',
   야구: 'https://news.hmgjournal.com/images_n/contents/191204_baseball_01.png',
-  기타: [
-    'https://file.mk.co.kr/meet/neds/2021/06/image_readtop_2021_535745_16226846584668330.jpg',
-  ], //적당히 스포츠적이고 무난한 이미지
+  기타:
+    'https://file.mk.co.kr/meet/neds/2021/06/image_readtop_2021_535745_16226846584668330.jpg', //적당히 스포츠적이고 무난한 이미지
 };
 
 const setCategory = () => {

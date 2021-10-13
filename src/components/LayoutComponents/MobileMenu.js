@@ -8,7 +8,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import 'components/LayoutComponents/MobileMenu.css';
 
-const MobileMenu = () => {
+const MobileMenu = ({ email }) => {
   const activeStyle = {
     color: '#5cdbd3',
   }; //path가 일치 할 때 메뉴 스타일
@@ -19,16 +19,16 @@ const MobileMenu = () => {
         <NavLink exact to="/" activeStyle={activeStyle}>
           <HomeOutlined />
         </NavLink>
-        <NavLink to="/serach" activeStyle={activeStyle}>
+        <NavLink exact to="/search" activeStyle={activeStyle}>
           <SearchOutlined />
         </NavLink>
-        <NavLink to="/writepost" activeStyle={activeStyle}>
+        <NavLink exact to="/writepost" activeStyle={activeStyle}>
           <PlusSquareOutlined />
         </NavLink>
-        <NavLink to="/messages" activeStyle={activeStyle}>
+        <NavLink exact to="/messages" activeStyle={activeStyle}>
           <MessageOutlined />
         </NavLink>
-        <NavLink to="/profile" activeStyle={activeStyle}>
+        <NavLink exact to={`/myprofile/${email}`} activeStyle={activeStyle}>
           <UserOutlined />
         </NavLink>
       </div>

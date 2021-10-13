@@ -94,6 +94,10 @@ h1 {
   color: rgba(1, 1, 1, 0.4);
 }
 
+.topMenu .ant-avatar-icon {
+  cursor: pointer;
+}
+
 /* 드롭다운 메뉴 */
 .headerNav {
   padding: 5px;

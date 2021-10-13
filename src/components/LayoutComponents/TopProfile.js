@@ -4,17 +4,19 @@ import { Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import Myprofile from './Myprofile';
 
-const TopProfile = () => {
+const TopProfile = ({ email }) => {
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <Link to="/Myprofile" components={Myprofile}>
+        <Link to={`/myprofile/${email}`} components={Myprofile}>
           내 프로필
         </Link>
       </Menu.Item>
       <Menu.Item key="1">설정</Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="2">로그아웃</Menu.Item>
+      <Menu.Item key="2">
+        <a href="http://localhost:8080/logout">로그아웃</a>
+      </Menu.Item>
     </Menu>
   );
 

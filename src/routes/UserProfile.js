@@ -1,39 +1,40 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Form, Button, Input, Card, Col, Row } from 'antd';
-import './Mypage.css';
-import { Link } from 'react-router-dom';
-import Myprofile from './Myprofile';
+import { Form, Button, Card, Col, Row } from 'antd';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import LoginPage from 'routes/LoginPage';
 
-/* TODO
+const UserProfile = ({ match }) => {
+  const { email } = match.params;
+  const [profile, setProfile] = useState('');
 
-1. Mypage.js에서 수정한내용 Myprofile.js에서 반영되게하기
+  const getData = async () => {
+    await axios.get(`/api/user/userInfo/${email}`).then(res => {
+      setProfile(res.data);
+      console.log(res.data);
+    });
+  };
 
-*/
-const Mypage = () => {
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <Form className="nicknamewrap">
-        <div className="emailbottom">email</div>
+        <div className="emailbottom" />
         <Col span={22}>
-          <Input
-            className="nickname"
-            type="text"
-            placeholder="수정할 닉네임"
-            maxLength={20}
-          />
+          <span style={{ marginLeft: '4%' }}> </span>
         </Col>
       </Form>
 
       <div className="nicknamewrap">
-        <div className="emailbottom">자기소개</div>
+        <div className="emailbottom">자기 소개</div>
         <Col span={22}>
-          <textarea
-            className="intro-input"
-            type="text"
-            placeholder="간단한 자기소개를 적어주세요."
-            maxLength={200}
-          />
+          <span className="emaildetail">
+            {profile.email} {profile.nickname}{' '}
+          </span>
         </Col>
       </div>
 
@@ -71,18 +72,8 @@ const Mypage = () => {
           </Row>
         </div>
       </div>
-      <Button
-        style={{ float: 'right', marginBottom: '30px' }}
-        type="primary"
-        shape="round"
-        size="large"
-      >
-        <Link to="/Myprofile" components={Myprofile}>
-          확인
-        </Link>
-      </Button>
     </>
   );
 };
 
-export default Mypage;
+export default UserProfile;

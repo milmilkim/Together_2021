@@ -1,19 +1,32 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { Input } from 'antd';
+import Swal from 'sweetalert2';
+import { List } from 'antd';
 
-const LocalSeraching = () => {
-  const { Search } = Input;
-
+const LocalSeraching = ({ saveKeywordAddress }) => {
   const REST_API_KEY = 'b848a4ccc1802d07fa250ac646972888';
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [addressObject, setAddressObject] = useState([]);
-  const page = '1'; //나중에 페이지 넘길 수 있게 수정하면 좋습니다...
+  const page = '1';
 
-  const onSearch = value => {
-    setQuery(value);
+  // const onSearch = value => {};
+
+  const getKeyword = async () => {
+    await Swal.fire({
+      title: '키워드로 검색하기',
+      input: 'text',
+      text: '키워드를 입력하세요',
+      inputPlaceholder: 'ex) 가천대학교',
+      confirmButtonText: '입력',
+      showCancelButton: true,
+      cancelButtonText: '취소',
+    }).then(result => {
+      if (result.isConfirmed) {
+        setQuery(result.value);
+      }
+    });
   };
 
   const getData = async () => {
@@ -34,22 +47,35 @@ const LocalSeraching = () => {
   };
 
   useEffect(() => {
-    if (query !== '') getData();
-  }, [query]); //값이 변경될 때마다 실행
+    getKeyword();
+  }, []);
+
+  useEffect(() => {
+    if (query !== '') {
+      getData();
+    }
+  }, [query]);
 
   return (
     <>
-      <Search placeholder="input search text" onSearch={onSearch} enterButton />
-
       {loading ? (
         <div>loading...</div>
       ) : (
         <div>
-          {addressObject.map(item => (
-            <li>
-              {item.address_name} {item.place_name}
-            </li>
-          ))}
+          <List
+            itemLayout="horizontal"
+            dataSource={addressObject}
+            renderItem={item => (
+              <List.Item>
+                <List.Item.Meta
+                  title={item.place_name}
+                  description={item.address_name}
+                  onClick={() => saveKeywordAddress(item)}
+                  style={{ cursor: 'pointer' }}
+                />
+              </List.Item>
+            )}
+          />
         </div>
       )}
     </>

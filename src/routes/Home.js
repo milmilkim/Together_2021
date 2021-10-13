@@ -8,9 +8,14 @@ const Home = () => {
       <HomeCarousel />
 
       <div className="home__icons">
-        <Link to="/#">
+        <Link to="/category/축구">
           <div className="home__icons--icon">
             <img src="football.png" alt="football" />
+          </div>
+        </Link>
+        <Link to="/category/야구">
+          <div className="home__icons--icon">
+            <img src="baseball.png" alt="baseball" />
           </div>
         </Link>
         <div className="home__icons--icon">
@@ -23,7 +28,7 @@ const Home = () => {
 
       <h1 style={{ fontWeight: 700, marginBottom: '20px' }}> 찾아보기 😙 </h1>
 
-      <ListCard />
+      <ListCard category="all" email="email" />
     </>
   );
 };

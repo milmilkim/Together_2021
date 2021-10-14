@@ -8,6 +8,7 @@ import UserProfile from 'routes/UserProfile';
 import 'routes/Post.css';
 import moment from 'moment';
 import { baseApiUrl } from 'components/Options';
+import { BsFillGeoAltFill } from 'react-icons/bs';
 
 const Post = ({ match, history }) => {
   const { idx } = match.params;
@@ -105,7 +106,8 @@ const Post = ({ match, history }) => {
       // await axios.get(`/api/board/posts/${idx}`).then(res => {
       await axios
         // .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
-        .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
+        // .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
+        .get(`${baseApiUrl}/api/board/posts/${idx}`)
         .then(res => {
           setPost(res.data);
           console.log(res);
@@ -145,7 +147,9 @@ const Post = ({ match, history }) => {
               )}
             </div>
             <div className="info">
-              <div className="place">{placeName}</div>
+              <div className="place">
+                <BsFillGeoAltFill /> {placeName}
+              </div>
               <div className="label">사람수</div>
               <div className="detail">{needPeopleNum}</div>
               <div className="label">날짜</div>
@@ -168,7 +172,7 @@ const Post = ({ match, history }) => {
           {/* <li>아이디: {idx}</li> */}
           {isModalVisible && (
             <Modal
-              title={`${writer} 님의 프로필`}
+              title={`프로필`}
               visible={isModalVisible}
               onOk={handleOk}
               onCancel={handleCancel}
@@ -187,7 +191,7 @@ const Post = ({ match, history }) => {
             {!mine && !recruiting && <Button disabled>참가신청</Button>}
             {!mine && (
               <>
-                {mine && recruiting && (
+                {!mine && recruiting && (
                   <Button onClick={postClose}>모집마감</Button>
                 )}
                 <Link to={`/update/${idx}`}>

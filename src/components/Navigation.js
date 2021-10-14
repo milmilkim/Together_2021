@@ -19,9 +19,18 @@ function Navigation() {
     //     <MenuOutlined style={{ fontSize: '20px' }} />
     //   </a>
     // </Dropdown>
-    <Menu onClick={handleClick} selectedKeys={key} mode="horizontal">
-      <Menu.Item key="home">홈</Menu.Item>
-      <Menu.Item key="map">지도에서 찾기</Menu.Item>
+    <Menu
+      onClick={handleClick}
+      selectable={false}
+      mode="horizontal"
+      triggerSubMenuAction="click"
+    >
+      <Menu.Item key="home">
+        <Link to="/">홈</Link>
+      </Menu.Item>
+      <Menu.Item key="map">
+        <Link to="/contents">지도에서 찾기</Link>
+      </Menu.Item>
       <SubMenu key="SubMenu" title="종목으로 찾기">
         {setCategory()}
       </SubMenu>

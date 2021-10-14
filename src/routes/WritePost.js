@@ -54,9 +54,10 @@ const WritePost = ({ history }) => {
         try {
           axios
             .post(
-              // 'http://ec2-54-180-175-20.ap-northeast-2.compute.amazonaws.com:8080/api/board/posts',
-              'https://www.healthtogether.kro.kr/api/board/posts',
+              'http://ec2-54-180-175-20.ap-northeast-2.compute.amazonaws.com:8080/api/board/posts',
+              // 'https://www.healthtogether.kro.kr/api/board/posts',
               post,
+              { withCredentials: true },
             )
             .then(() => {
               Swal.fire('저장 완료!', '', 'success');
@@ -255,9 +256,9 @@ const WritePost = ({ history }) => {
           <Form.Item>
             <Radio.Group size="large" defaultValue="a">
               <Space size="middle">
-                <Radio.Button value="a" onClick={() => setInputLocation('')}>
+                {/* <Radio.Button value="a" onClick={() => setInputLocation('')}>
                   미지정
-                </Radio.Button>
+                </Radio.Button> */}
                 <Radio.Button value="b" onClick={myLocation}>
                   내 위치
                 </Radio.Button>
@@ -279,6 +280,7 @@ const WritePost = ({ history }) => {
               value={inputLocation}
             />
           </Form.Item>
+
           <Form.Item
             name="date-picker"
             rules={[

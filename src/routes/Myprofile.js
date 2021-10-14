@@ -8,8 +8,9 @@ import LoginPage from 'routes/LoginPage';
 import { Avatar, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
+import { baseApiUrl } from 'components/Options';
 
-const Myprofile = ({ match }) => {
+const Myprofile = ({ match, history }) => {
   const { email } = match.params;
   const [profile, setProfile] = useState(''); //프로필
   const [editing, setEditing] = useState(false); //수정 여부
@@ -17,10 +18,12 @@ const Myprofile = ({ match }) => {
   const [prevNickname, setPrevNickname] = useState('');
 
   const getData = async () => {
-    await axios.get(`/api/user/userInfo/${email}`).then(res => {
+    if (email === undefined) {
+      history.push('/loginpage');
+    }
+    await axios.get(`${baseApiUrl}/api/user/userInfo/${email}`).then(res => {
       setProfile(res.data);
       setPrevNickname(res.data.nickname);
-      console.log(res.data);
     });
   }; //프로필 불러옴
 
@@ -46,7 +49,7 @@ const Myprofile = ({ match }) => {
     if (validatedNickname) {
       console.log(profile);
       await axios
-        .put(`/api/user/userInfo/${email}`, profile)
+        .put(`${baseApiUrl}/api/user/userInfo/${email}`, profile)
         .then(() => setEditing(false));
       Swal.fire({ title: '수정완료~_~!!!', icon: 'success' });
     } else {
@@ -60,7 +63,7 @@ const Myprofile = ({ match }) => {
       setValidatedNickname(true);
     } else
       await axios
-        .get(`/api/user/userInfo/DuplicateCheck/${nickname}`)
+        .get(`${baseApiUrl}/api/user/userInfo/DuplicateCheck/${nickname}`)
         .then(res => {
           setValidatedNickname(res.data);
           if (res.data == true) {

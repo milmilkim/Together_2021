@@ -31,15 +31,17 @@ const UserProfile = ({ email }) => {
   }, []);
 
   return (
-    <>
-      <Avatar src={picture} icon={<UserOutlined />} size={64} />
-      <li>{nickname}</li>
-      <li>{selfIntroduction}</li>
-      <li>{livingPlace}</li>
-      <li>{preference1}</li>
-      <li>{preference2}</li>
-      <li>{preference3}</li>
-    </>
+    <div className="userProfile">
+      <div>
+        <Avatar src={picture} icon={<UserOutlined />} size={64} />
+      </div>
+      <div>{nickname} 닉네임</div>
+      <div>{selfIntroduction} 자기소개</div>
+      <div>{livingPlace} 사는 곳</div>
+      <div>{preference1} 선호1</div>
+      <div>{preference2} 선호2</div>
+      <div>{preference3} 선호</div>
+    </div>
   );
 };
 

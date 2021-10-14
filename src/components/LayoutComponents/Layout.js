@@ -10,22 +10,10 @@ import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { layoutState, loginState } from 'state';
 import { baseApiUrl } from 'components/Options';
+import Cookies from 'universal-cookie/es6';
 
-const Layout = ({}) => {
+const Layout = () => {
   const { Content } = AntLayout;
-
-  const [email, setEmail] = useState('');
-
-  const getEmail = async () => {
-    await axios.get(`${baseApiUrl}/api/loginedUser`).then(res => {
-      console.log(res);
-      setEmail(res.data);
-    });
-  };
-
-  useEffect(() => {
-    getEmail();
-  }, []);
 
   const style = {
     height: 40,
@@ -42,9 +30,9 @@ const Layout = ({}) => {
 
   return (
     <AntLayout className="layout">
-      <LayoutHeader email={email} />
+      <LayoutHeader />
 
-      <MobileMenu email={email} />
+      <MobileMenu />
       <Content>
         <AppRouter />
         <BackTop>

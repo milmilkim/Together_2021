@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 import { setThumbnail } from 'components/Options';
+import { BsFillGeoAltFill } from 'react-icons/bs';
 
 const ListCard = ({ getApi, keyword }) => {
   //종목을 받아옴
@@ -111,7 +112,7 @@ const ListCard = ({ getApi, keyword }) => {
 
                     <Meta
                       className="card__profile"
-                      avatar={<Avatar size={60} src={list.userPicture} />} //프로필이미지 구현 예정?
+                      avatar={<Avatar size={60} src={list.userPicture} />} //프로필 이미지
                     />
                     <Meta
                       className="card__name"

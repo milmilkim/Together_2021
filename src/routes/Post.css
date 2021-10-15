@@ -36,6 +36,10 @@
   border-radius: 5px;
 }
 
+.postHeader__writer img {
+  cursor: pointer;
+}
+
 .postHeader__writer span:last-child {
   margin: 10px;
   cursor: pointer;

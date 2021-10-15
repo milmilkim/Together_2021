@@ -18,17 +18,4 @@
   - :page_facing_up: state.js - Recoil 전역 state 설정
   - :page_facing_up: package.json - 배포 시 30행 지우기
 
-## API
-
-### JavaScript 키
-
-> 2c96104a0c5b6f8d35c5c54e073445e3
-
-### Rest API 키
-
-> b848a4ccc1802d07fa250ac646972888
-
-### Admin 키
-
-> cb4385d58421f5fa4ab24a2edb6a7f2a
 

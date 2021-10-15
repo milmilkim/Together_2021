@@ -22,11 +22,10 @@ import { baseApiUrl } from 'components/Options';
 import moment from 'moment';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import { selectEvent } from 'components/Options';
+import 'routes/UserProfile.css';
 
 const UpdatePost = ({ history, match }) => {
   //글쓰기 페이지+불러온 데이터.
-
-  //변수 이름때문에 보류하겠습니다.
 
   const [form] = Form.useForm();
 

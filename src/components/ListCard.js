@@ -74,7 +74,7 @@ const ListCard = ({ getApi, keyword }) => {
         >
           <Row gutter={10}>
             {data.map(list => (
-              <Col xs={12} sm={12} md={8}>
+              <Col xs={24} sm={12} md={8}>
                 <Link to={`/post/${list.id}`}>
                   <Card
                     hoverable

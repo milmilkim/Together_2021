@@ -80,16 +80,7 @@
 .description {
   width: 100%;
   padding: 20px;
-  text-align: center;
-  justify-content: center;
-  display: flex;
-}
-
-.description .text:before {
-  content: '\201C';
-  font-size: 3em;
-  font-family: Georgia;
-  color: #bcbcbc;
+  width: 100%;
 }
 
 .postButtonWraper {

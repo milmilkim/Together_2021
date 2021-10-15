@@ -19,6 +19,7 @@ import LocalSeraching from 'components/LocalSearching';
 import 'routes/WritePost.css';
 import Swal from 'sweetalert2';
 import { selectEvent } from 'components/Options';
+import { getToken } from 'components/Token';
 
 const WritePost = ({ history }) => {
   const [post, setPost] = useState({
@@ -209,6 +210,11 @@ const WritePost = ({ history }) => {
   };
 
   useEffect(() => {}, [visible]);
+  useEffect(() => {
+    if (!getToken()) {
+      history.push('/loginpage');
+    }
+  }, []);
 
   //-----------------------------------------------------------
 

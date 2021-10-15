@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { Menu, Dropdown } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getEmail, getToken, deleteToken } from 'components/Token';
@@ -33,7 +33,6 @@ const TopProfile = ({ logOut }) => {
       <Menu.Item key="0">
         <Link to={`/myprofile/${email}`}>내 프로필</Link>
       </Menu.Item>
-      <Menu.Item key="1">설정</Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">
         <div onClick={logOut}>로그아웃</div>

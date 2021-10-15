@@ -5,15 +5,17 @@ import MobileMenu from 'components/LayoutComponents/MobileMenu';
 import AppRouter from 'components/Router';
 import LayoutFooter from 'components/LayoutComponents/LayoutFooter';
 import 'components/LayoutComponents/Layout.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { layoutState, loginState } from 'state';
-import { baseApiUrl } from 'components/Options';
-import Cookies from 'universal-cookie/es6';
+import { useEffect } from 'react';
+import { setToken } from 'components/Token';
+import { withRouter } from 'react-router';
 
-const Layout = () => {
+const Layout = ({ history }) => {
   const { Content } = AntLayout;
+
+  useEffect(() => {
+    setToken();
+    history.push('/');
+  }, []);
 
   const style = {
     height: 40,
@@ -48,4 +50,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default withRouter(Layout);

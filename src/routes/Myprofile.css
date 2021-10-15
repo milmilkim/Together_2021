@@ -1,65 +1,64 @@
-.site-card-wrapper {
-  padding: 30px;
-}
-
-.emailbottom {
-  margin-bottom: 10px;
-  border-bottom: 2px solid #d9d9d9;
-  padding: 10px;
-  font-size: 18px;
-  padding-left: 3%;
-  padding-top: 0;
-}
-
-.cardwrap {
-  border: 2px solid #d9d9d9;
-  margin-bottom: 30px;
-  border-radius: 20px;
-}
-.subtitle {
+.myProfile {
   width: 100%;
-  border-bottom: 1px solid #d9d9d9;
-  padding-left: 5%;
-  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
 }
 
-.nickname,
-.intro-input {
-  margin-left: 3%;
-}
-.modify {
-  float: left;
-  margin-left: 2%;
-  background: #0ff;
-  color: #fff;
-  font-weight: 700;
-}
+/* .myProfile .ant-input {
+  padding: 0;
+} */
 
-.carddetail {
-  border: 2px solid #d9d9d9;
-  border-radius: 10px;
-}
+.myProfile__wrap {
+  width: 520px;
+  border-radius: 5px;
 
-.emailwrap {
-  margin-bottom: 5px;
-  border: 2px solid #d9d9d9;
-  padding: 5px;
-  border-radius: 20px;
-}
-
-.nicknamewrap {
-  margin: 30px 0;
-  border: 2px solid #d9d9d9;
+  background-color: #fff;
+  box-shadow: 0 13px 26px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
   padding: 20px;
-  border-radius: 20px;
-  overflow: hidden;
 }
 
-.emaildetail {
-  padding-left: 3%;
-}
-
-.intro-input {
+.myProfile__header {
   width: 100%;
-  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px var(--color-gray);
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+.myProfile__picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.myProfile__body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.myProfile__nickname {
+  font-size: 24px;
+  font-family: nanumBarunGothicBold;
+  margin-bottom: 10px;
+}
+
+.myProfile__livingPlace {
+  color: #b7b8c0;
+  margin-bottom: 10px;
+}
+
+.myProfile__selfIntroduction {
+  margin-bottom: 20px;
+}
+
+.myProfile__preference {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-top: 1px solid var(--color-gray);
 }

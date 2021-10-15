@@ -9,7 +9,7 @@ import {
 import Navigation from 'components/Navigation';
 import { Badge } from 'antd';
 import TopProfile from 'components/LayoutComponents/TopProfile';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { layoutState } from 'state';
 import { getToken, deleteToken } from 'components/Token';
@@ -30,6 +30,7 @@ const LayoutHeader = ({ history }) => {
     deleteToken();
     setIsLogOut(!islogOut);
     Swal.fire('로그아웃', '로그아웃되었습니다.', 'success');
+    history.push('/');
   };
 
   useEffect(() => {}, [islogOut]);
@@ -81,4 +82,4 @@ const LayoutHeader = ({ history }) => {
   );
 };
 
-export default LayoutHeader;
+export default withRouter(LayoutHeader);

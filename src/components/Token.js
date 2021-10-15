@@ -1,4 +1,5 @@
 import Cookies from 'universal-cookie/es6';
+import { withRouter } from 'react-router';
 
 const cookies = new Cookies();
 

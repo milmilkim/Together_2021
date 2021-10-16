@@ -3,11 +3,11 @@ import {
   PlusSquareOutlined,
   MessageOutlined,
   LoginOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 
 import Navigation from 'components/Navigation';
 import { Badge } from 'antd';
-import SearchBox from 'components/LayoutComponents/SearchBox';
 import TopProfile from 'components/LayoutComponents/TopProfile';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -26,11 +26,15 @@ const LayoutHeader = ({ email }) => {
         <Header>
           <div className="header_wrap">
             <div className="logo">
-              <Link to="/">함께, 운동</Link>
+              <Link to="/">
+                <img src="logo.png" alt="함께, 운동" />
+              </Link>
             </div>
             <div className="topMenu">
               <Space size="middle">
-                <SearchBox />
+                <Link to="/searchpost">
+                  <SearchOutlined style={{ fontSize: '30px' }} />
+                </Link>
 
                 {email !== '' ? (
                   <>

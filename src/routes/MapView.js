@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import 'routes/MapView.css';
+import { baseApiUrl } from 'components/Options';
 
 const MapView = ({ history }) => {
   const [locations, setLocations] = useState([]);
@@ -12,8 +13,8 @@ const MapView = ({ history }) => {
   }; //뒤로가기 버튼
 
   const getData = async () => {
-    await axios.get(`/api/home?page=${page}`).then(res => {
-      const data = res.data.content;
+    await axios.get(`${baseApiUrl}/api/board/all`).then(res => {
+      const data = res.data;
       setLocations(data);
 
       const tempArray = []; //새 배열을 만듭니다.
@@ -21,6 +22,7 @@ const MapView = ({ history }) => {
       for (var i = 0; i < data.length; i++) {
         tempArray[i] = {
           title: data[i].title,
+          event: data[i].event,
           latlng: new kakao.maps.LatLng(
             data[i].locationY, //위도
             data[i].locationX, //경도 .....
@@ -60,9 +62,6 @@ const MapView = ({ history }) => {
         var locPosition = new kakao.maps.LatLng(lat, lon);
         map.setCenter(locPosition);
       });
-    } else {
-      var locPosition = new kakao.maps.LatLng(33.450701, 126.570667); //현재 위치를 불러올 수 없을 때: 기본값은 카카오 본사입니다
-      map.setCenter(locPosition);
     }
 
     // 마커 이미지의 이미지 주소입니다
@@ -86,9 +85,13 @@ const MapView = ({ history }) => {
       var link = document.createElement('div');
       link.className = 'link';
       content.appendChild(link);
+      content.onclick = () => history.push(`/post/${position.idx}`);
+
       var goPost = document.createElement('div');
       goPost.className = 'title';
+      goPost.appendChild(document.createTextNode('[' + position.event + ']'));
       goPost.appendChild(document.createTextNode(position.title));
+
       goPost.onclick = () => history.push(`/post/${position.idx}`);
       link.appendChild(goPost);
 
@@ -114,18 +117,9 @@ const MapView = ({ history }) => {
     <div>
       <div
         className="map"
-        style={{ width: '100%', height: '300px', zIndex: '0' }}
+        style={{ width: '100%', height: '80vh', zIndex: '0' }}
         ref={container}
       />
-
-      <div>
-        (지역이 다를 땐 축소를 많이 하면 마커가 보입니다.) 우선 현재 위치를
-        불러와 중심 좌표로 설정한 후, 목록에서 위도 경도 가져와서 뿌려줌
-        <br />
-        현재는 최신순으로, 모집중 여부 관계 없이 12개만 보여주는데 거리순으로
-        정렬해야 n개 ..이런식으로 해야 하지 않을까..?? 하지만 시간이 없으니
-        구현만 해놓는 것으로 =_=
-      </div>
     </div>
   );
 };

@@ -18,9 +18,12 @@ import axios from 'axios';
 import LocalSeraching from 'components/LocalSearching';
 import 'routes/WritePost.css';
 import Swal from 'sweetalert2';
+import { baseApiUrl } from 'components/Options';
 
 const UpdatePost = ({ history, match }) => {
   //글쓰기 페이지+불러온 데이터.
+
+  //변수 이름때문에 보류하겠습니다.
 
   const [form] = Form.useForm();
 
@@ -30,10 +33,10 @@ const UpdatePost = ({ history, match }) => {
     addressName: '',
     content: '',
     event: '',
-    modifiedEventTime: '',
-    location_x: '',
-    location_y: '',
-    needPeopleNum: 33,
+    eventTime: '',
+    locationX: '',
+    locationY: '',
+    needPeopleNum: '',
     placeName: '',
     region1Depth: '',
     region2Depth: '',
@@ -42,12 +45,12 @@ const UpdatePost = ({ history, match }) => {
 
   const getData = async () => {
     try {
-      await axios.get(`/api/board/posts/${idx}`).then(res => {
+      await axios.get(`${baseApiUrl}/api/board/posts/${idx}`).then(res => {
         // setPost(res.data);
         form.setFieldsValue({
           title: res.data.title,
           content: res.data.content,
-          needPeople: res.data.needPeopleNumber,
+          needPeople: res.data.needPeopleNum,
           event: res.data.event,
           address: res.data.addressName,
         });
@@ -77,9 +80,9 @@ const UpdatePost = ({ history, match }) => {
       cancelButtonText: '취소',
     }).then(result => {
       if (result.isConfirmed) {
-        axios.put(`/api/board/posts/${idx}`, post).then(() => {
+        axios.put(`${baseApiUrl}/api/board/posts/${idx}`, post).then(() => {
           Swal.fire('수정 완료!', '', 'success');
-          history.push('/');
+          history.push(`/post/${idx}`);
         });
       }
     });

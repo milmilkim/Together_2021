@@ -1,0 +1,22 @@
+.loginPage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginHeader {
+  padding-bottom: 10px;
+}
+
+.loginButton img {
+  width: 280px;
+}
+
+.loginButtonWrap {
+  background: #fff;
+  margin-top: 60px;
+  padding: 30px;
+  border: solid 1px var(--color-gray);
+}

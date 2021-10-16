@@ -24,6 +24,10 @@
 
 /*마이페이지 선호 컨텐츠 모바일화면 추가해놨습니다!*/
 @media screen and (max-width: 768px) {
+  body,
+  html {
+    font-size: 12px;
+  }
   .mobileMenu {
     display: block;
     position: fixed;
@@ -45,5 +49,16 @@
   }
   .site-card-wrapper > div.ant-row > .ant-col {
     max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #searchWrap {
+    width: 95% !important;
+  }
+  .searchList {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 0 20px 0 !important;
   }
 }

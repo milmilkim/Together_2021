@@ -1,4 +1,5 @@
 import ListCard from 'components/ListCard';
+import { baseApiUrl } from 'components/Options';
 
 const Category = ({ match }) => {
   //어쩌고
@@ -7,7 +8,7 @@ const Category = ({ match }) => {
 
   return (
     <>
-      <ListCard category={category} />
+      <ListCard getApi={`${baseApiUrl}/api/board/search/` + category} />
     </>
   );
 };

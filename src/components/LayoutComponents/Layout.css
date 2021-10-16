@@ -80,8 +80,7 @@ h1 {
 }
 
 .logo img {
-  width: 40px;
-  height: 40px;
+  width: 200px;
 }
 
 /* 우측 상단 메뉴 */
@@ -166,9 +165,10 @@ h1 {
     font-size: 24px;
   }
 
-  .ant-layout-header {
-    height: 60px;
+  .logo img {
+    width: 150px;
   }
+
   .topMenu {
     display: none;
   }
@@ -182,14 +182,8 @@ h1 {
 
   .ant-layout-header {
     position: sticky;
-  }
-
-  .headerNav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding-top: 20px;
-    padding-left: 20px;
+    padding: 0;
+    padding-left: 10px;
   }
 
   .ant-layout-footer {

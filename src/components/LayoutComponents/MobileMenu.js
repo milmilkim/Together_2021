@@ -19,7 +19,7 @@ const MobileMenu = ({ email }) => {
         <NavLink exact to="/" activeStyle={activeStyle}>
           <HomeOutlined />
         </NavLink>
-        <NavLink exact to="/search" activeStyle={activeStyle}>
+        <NavLink exact to="/searchpost" activeStyle={activeStyle}>
           <SearchOutlined />
         </NavLink>
         <NavLink exact to="/writepost" activeStyle={activeStyle}>

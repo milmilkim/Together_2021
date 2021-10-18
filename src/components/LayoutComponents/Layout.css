@@ -100,6 +100,7 @@ h1 {
 /* 드롭다운 메뉴 */
 .headerNav {
   padding: 5px;
+  font-family: NanumBarunGothic;
 }
 .header_wrap,
 .headerNav,
@@ -110,6 +111,11 @@ h1 {
 
 .ant-dropdown {
   position: fixed;
+}
+
+.ant-menu-horizontal {
+  border: 0;
+  font-size: 14px;
 }
 
 /* 홈 이미지 카테고리 */

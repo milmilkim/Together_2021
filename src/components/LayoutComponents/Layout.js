@@ -5,26 +5,16 @@ import MobileMenu from 'components/LayoutComponents/MobileMenu';
 import AppRouter from 'components/Router';
 import LayoutFooter from 'components/LayoutComponents/LayoutFooter';
 import 'components/LayoutComponents/Layout.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { layoutState, loginState } from 'state';
-import { baseApiUrl } from 'components/Options';
+import { useEffect } from 'react';
+import { setToken } from 'components/Token';
+import { withRouter } from 'react-router';
 
-const Layout = ({}) => {
+const Layout = ({ history }) => {
   const { Content } = AntLayout;
 
-  const [email, setEmail] = useState('');
-
-  const getEmail = async () => {
-    await axios.get(`${baseApiUrl}/api/loginedUser`).then(res => {
-      console.log(res);
-      setEmail(res.data);
-    });
-  };
-
   useEffect(() => {
-    getEmail();
+    setToken();
+    history.push('/');
   }, []);
 
   const style = {
@@ -42,9 +32,9 @@ const Layout = ({}) => {
 
   return (
     <AntLayout className="layout">
-      <LayoutHeader email={email} />
+      <LayoutHeader />
 
-      <MobileMenu email={email} />
+      <MobileMenu />
       <Content>
         <AppRouter />
         <BackTop>
@@ -60,4 +50,4 @@ const Layout = ({}) => {
   );
 };
 
-export default Layout;
+export default withRouter(Layout);

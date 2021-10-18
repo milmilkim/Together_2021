@@ -5,8 +5,10 @@ import { useState, useEffect } from 'react';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { baseApiUrl } from 'components/Options';
+import { FaArrowLeft, FaEnvelope } from 'react-icons/fa';
+import { BsFillGeoAltFill } from 'react-icons/bs';
 
-const UserProfile = ({ email }) => {
+const UserProfile = ({ email, handleCancel, mine }) => {
   const [profile, setProfile] = useState('');
 
   const getData = async () => {
@@ -31,15 +33,36 @@ const UserProfile = ({ email }) => {
   }, []);
 
   return (
-    <>
-      <Avatar src={picture} icon={<UserOutlined />} size={64} />
-      <li>{nickname}</li>
-      <li>{selfIntroduction}</li>
-      <li>{livingPlace}</li>
-      <li>{preference1}</li>
-      <li>{preference2}</li>
-      <li>{preference3}</li>
-    </>
+    <div className="userProfile">
+      <div className="userProfile__header">
+        <span onClick={handleCancel}>
+          <FaArrowLeft />
+        </span>
+      </div>
+      <div className="userProfile__picture">
+        <Avatar src={picture} icon={<UserOutlined />} size={132} />
+      </div>
+
+      <div className="userProfile__nickname">{nickname}</div>
+      <div className="userProfile__livingPlace">
+        <BsFillGeoAltFill /> {livingPlace}
+      </div>
+      <div className="userProfile__selfIntroduction">{selfIntroduction}</div>
+      {!mine && (
+        <div className="userProfile__button">
+          <span>
+            <FaEnvelope />
+          </span>
+          &nbsp;&nbsp;메세지 보내기
+        </div>
+      )}
+
+      <div className="userProfile__preference">
+        <span>{preference1}</span>
+        <span>{preference2}</span>
+        <span>{preference3}</span>
+      </div>
+    </div>
   );
 };
 

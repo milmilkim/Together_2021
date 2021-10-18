@@ -8,8 +8,11 @@ import LoginPage from 'routes/LoginPage';
 import { Avatar, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
+import { baseApiUrl } from 'components/Options';
+import { getToken } from 'components/Token';
+import { BsFillGeoAltFill } from 'react-icons/bs';
 
-const Myprofile = ({ match }) => {
+const Myprofile = ({ match, history }) => {
   const { email } = match.params;
   const [profile, setProfile] = useState(''); //프로필
   const [editing, setEditing] = useState(false); //수정 여부
@@ -17,10 +20,12 @@ const Myprofile = ({ match }) => {
   const [prevNickname, setPrevNickname] = useState('');
 
   const getData = async () => {
-    await axios.get(`/api/user/userInfo/${email}`).then(res => {
+    if (email === undefined) {
+      history.push('/loginpage');
+    }
+    await axios.get(`${baseApiUrl}/api/user/userInfo/${email}`).then(res => {
       setProfile(res.data);
       setPrevNickname(res.data.nickname);
-      console.log(res.data);
     });
   }; //프로필 불러옴
 
@@ -46,7 +51,7 @@ const Myprofile = ({ match }) => {
     if (validatedNickname) {
       console.log(profile);
       await axios
-        .put(`/api/user/userInfo/${email}`, profile)
+        .put(`${baseApiUrl}/api/user/userInfo/${email}`, profile)
         .then(() => setEditing(false));
       Swal.fire({ title: '수정완료~_~!!!', icon: 'success' });
     } else {
@@ -60,7 +65,7 @@ const Myprofile = ({ match }) => {
       setValidatedNickname(true);
     } else
       await axios
-        .get(`/api/user/userInfo/DuplicateCheck/${nickname}`)
+        .get(`${baseApiUrl}/api/user/userInfo/DuplicateCheck/${nickname}`)
         .then(res => {
           setValidatedNickname(res.data);
           if (res.data == true) {
@@ -88,128 +93,121 @@ const Myprofile = ({ match }) => {
     getData();
   }, []);
 
+  useEffect(() => {
+    if (!getToken()) {
+      history.push('/loginpage');
+    }
+  }, []);
+
   return (
-    <>
-      {/* {email !== '' ? ( */}
-      {true ? (
-        <>
-          <Avatar
-            size={128}
-            shape="circle"
-            icon={<UserOutlined />}
-            src={picture}
-          />
-          {!editing ? (
-            <Button
-              onClick={() => setEditing(!editing)}
-              style={{ float: 'right', marginBottom: '30px' }}
-              type="primary"
-              shape="round"
-              size="large"
-            >
-              수정
-            </Button>
-          ) : (
-            <>
-              <Button
-                onClick={profileUpdate}
-                style={{ float: 'right', marginBottom: '30px' }}
-                type="primary"
-                shape="round"
-                size="large"
-              >
-                등록
+    <div className="myProfile">
+      <div className="myProfile__wrap">
+        <div className="myProfile__header">
+          <div>{email}</div>
+          <div className="myProfile__btn">
+            {!editing ? (
+              <Button onClick={() => setEditing(!editing)} type="primary">
+                수정
               </Button>
-              <Button
-                onClick={() => setEditing(false)}
-                style={{ float: 'right', marginBottom: '30px' }}
-                shape="round"
-                size="large"
-              >
-                취소
-              </Button>
-            </>
-          )}
-          <Form className="nicknamewrap">
-            <div className="emailbottom">{email}</div>
-            <Col span={22}>
-              {editing ? (
-                <>
-                  <Input
-                    onChange={onChange}
-                    name="nickname"
-                    value={nickname}
-                    onKeyDown={() => setValidatedNickname(false)}
-                  />
-
-                  {!validatedNickname && (
-                    <Button onClick={nicknameChek}>중복 확인</Button>
-                  )}
-                </>
-              ) : (
-                <>
-                  <span style={{ marginLeft: '4%' }}>{nickname} </span>
-                </>
-              )}
-            </Col>
-          </Form>
-
-          <div className="nicknamewrap">
-            <div className="emailbottom">자기 소개</div>
-            <Col span={22}>
-              {editing ? (
-                <Input
-                  onChange={onChange}
-                  name="selfIntroduction"
-                  value={selfIntroduction}
-                />
-              ) : (
-                <span className="emaildetail">{selfIntroduction}</span>
-              )}
-            </Col>
+            ) : (
+              <>
+                <Button onClick={profileUpdate} type="primary">
+                  등록
+                </Button>
+                <Button onClick={() => setEditing(false)}>취소</Button>
+              </>
+            )}
           </div>
-          <div className="nicknamewrap">
-            <div className="emailbottom">지역</div>
-            <Col span={22}>
-              {editing ? (
-                <Input
-                  onChange={onChange}
-                  name="livingPlace"
-                  value={livingPlace}
-                />
-              ) : (
-                <span className="emaildetail">{livingPlace}</span>
-              )}
-            </Col>
+        </div>
+        <div className="myProfile__body">
+          <div className="myProfile__picture">
+            <Avatar
+              size={128}
+              shape="circle"
+              icon={<UserOutlined />}
+              src={picture}
+            />
           </div>
 
-          <div className="nicknamewrap">
-            <h2 className="emailbottom">선호 컨텐츠</h2>
-
+          <div className="myProfile__nickname">
             {editing ? (
               <>
                 <Input
                   onChange={onChange}
-                  name="preference1"
-                  value={preference1}
+                  placeholder="닉네임"
+                  name="nickname"
+                  value={nickname}
+                  onKeyDown={() => setValidatedNickname(false)}
+                  style={{
+                    fontSize: '24px',
+                    fontFamily: 'NanumBarunGothicBold',
+                  }}
                 />
-                <Input
-                  onChange={onChange}
-                  name="preference2"
-                  value={preference2}
-                />
-                <Input
-                  onChange={onChange}
-                  name="preference3"
-                  value={preference3}
-                />
+
+                {!validatedNickname && (
+                  <Button onClick={nicknameChek}>중복 확인</Button>
+                )}
               </>
             ) : (
+              <>{nickname}</>
+            )}
+          </div>
+          <div className="myProfile__livingPlace">
+            {editing ? (
+              <Input
+                prefix={<BsFillGeoAltFill />}
+                placeholder="지역"
+                onChange={onChange}
+                name="livingPlace"
+                value={livingPlace}
+              />
+            ) : (
               <>
-                선호1: {preference1} 선호2: {preference2} 선호3: {preference3}
+                <BsFillGeoAltFill /> {livingPlace}
               </>
             )}
+          </div>
+          {editing ? (
+            <Input
+              placeholder="자기 소개"
+              onChange={onChange}
+              name="selfIntroduction"
+              value={selfIntroduction}
+            />
+          ) : (
+            <div className="myProfile__selfIntroduction">
+              {selfIntroduction}
+            </div>
+          )}
 
+          <div>
+            <div className="myProfile__preference">
+              {editing ? (
+                <>
+                  <Input
+                    onChange={onChange}
+                    name="preference1"
+                    value={preference1}
+                  />
+                  <Input
+                    onChange={onChange}
+                    name="preference2"
+                    value={preference2}
+                  />
+                  <Input
+                    onChange={onChange}
+                    name="preference3"
+                    value={preference3}
+                  />
+                </>
+              ) : (
+                <>
+                  <span>{preference1}</span>
+                  <span>{preference2}</span>
+                  <span>{preference3}</span>
+                </>
+              )}
+            </div>
             {/* <div className="site-card-wrapper"> */}
             {/* <Row gutter={16}>
                 <Col span={8}>
@@ -242,13 +240,11 @@ const Myprofile = ({ match }) => {
               </Row> */}
             {/* </div> */}
           </div>
-        </>
-      ) : (
-        <>
-          <LoginPage />
-        </>
-      )}
-    </>
+          {/*선호 콘텐츠 */}
+        </div>{' '}
+        {/* myprofile body */}
+      </div>
+    </div>
   );
 };
 

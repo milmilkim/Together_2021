@@ -16,20 +16,18 @@ const AppRouter = () => {
   return (
     <>
       <ScrollToTop />
-      <Switch>
-        <Route exact path="/" exact component={Home} />
-        <Route exact path="/contents" component={Contents} />
-        <Route exact path="/loginpage" component={LoginPage} />
-        <Route exact path="/writepost" component={WritePost} />
-        <Route exact path="/messages" component={Messages} />
-        <Route exact path="/myprofile/:email" component={Myprofile} />
-        <Route exact path="/myprofile" component={LoginPage} />
-        <Route exact path="/userprofile/:email" component={userProfile} />
-        <Route exact path="/post/:idx" component={Post} />
-        <Route exact path="/category/:category" component={Category} />
-        <Route exact path="/searchpost" component={SearchPost} />
-        <Route exact path="/update/:idx" component={UpdatePost} />
-      </Switch>
+      <Route exact path="/" exact component={Home} />
+      <Route exact path="/contents" component={Contents} />
+      <Route exact path="/loginpage" component={LoginPage} />
+      <Route exact path="/writepost" component={WritePost} />
+      <Route exact path="/messages" component={Messages} />
+      <Route exact path="/myprofile/:email" component={Myprofile} />
+      <Route exact path="/myprofile" component={Myprofile} />
+      <Route exact path="/userprofile/:email" component={userProfile} />
+      <Route exact path="/post/:idx" component={Post} />
+      <Route exact path="/category/:category" component={Category} />
+      <Route exact path="/searchpost" component={SearchPost} />
+      <Route exact path="/update/:idx" component={UpdatePost} />
     </>
   );
 };

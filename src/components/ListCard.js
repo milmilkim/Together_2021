@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 import { setThumbnail } from 'components/Options';
+import { BsFillGeoAltFill } from 'react-icons/bs';
 
 const ListCard = ({ getApi, keyword }) => {
   //종목을 받아옴
@@ -73,7 +74,7 @@ const ListCard = ({ getApi, keyword }) => {
         >
           <Row gutter={10}>
             {data.map(list => (
-              <Col xs={12} sm={12} md={8}>
+              <Col xs={24} sm={12} md={8}>
                 <Link to={`/post/${list.id}`}>
                   <Card
                     hoverable
@@ -111,7 +112,7 @@ const ListCard = ({ getApi, keyword }) => {
 
                     <Meta
                       className="card__profile"
-                      avatar={<Avatar size={60} src={list.userPicture} />} //프로필이미지 구현 예정?
+                      avatar={<Avatar size={60} src={list.userPicture} />} //프로필 이미지
                     />
                     <Meta
                       className="card__name"

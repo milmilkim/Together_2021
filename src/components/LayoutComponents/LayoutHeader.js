@@ -9,16 +9,31 @@ import {
 import Navigation from 'components/Navigation';
 import { Badge } from 'antd';
 import TopProfile from 'components/LayoutComponents/TopProfile';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { layoutState } from 'state';
+import { getToken, deleteToken } from 'components/Token';
+import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
+import Swal from 'sweetalert2';
 
 import 'components/LayoutComponents/Layout.css';
 
-const LayoutHeader = ({ email }) => {
+const LayoutHeader = ({ history }) => {
   const { Header } = AntLayout;
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
   //layoutVisible이 true일 때만 출력
+
+  const [islogOut, setIsLogOut] = useState(false);
+
+  const logOut = () => {
+    deleteToken();
+    setIsLogOut(!islogOut);
+    Swal.fire('로그아웃', '로그아웃되었습니다.', 'success');
+    history.push('/');
+  };
+
+  useEffect(() => {}, [islogOut]);
 
   return (
     <>
@@ -36,7 +51,7 @@ const LayoutHeader = ({ email }) => {
                   <SearchOutlined style={{ fontSize: '30px' }} />
                 </Link>
 
-                {email !== '' ? (
+                {getToken() ? (
                   <>
                     <Link to="/writepost">
                       <PlusSquareOutlined style={{ fontSize: '30px' }} />
@@ -46,7 +61,7 @@ const LayoutHeader = ({ email }) => {
                         <MessageOutlined style={{ fontSize: '30px' }} />
                       </Link>
                     </Badge>
-                    <TopProfile email={email} />
+                    <TopProfile logOut={logOut} />
                   </>
                 ) : (
                   <>
@@ -67,4 +82,4 @@ const LayoutHeader = ({ email }) => {
   );
 };
 
-export default LayoutHeader;
+export default withRouter(LayoutHeader);

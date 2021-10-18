@@ -8,6 +8,7 @@ const Category = ({ match }) => {
 
   return (
     <>
+      <h1 style={{ paddingTop: '20px' }}> {category} </h1>
       <ListCard getApi={`${baseApiUrl}/api/board/search/` + category} />
     </>
   );

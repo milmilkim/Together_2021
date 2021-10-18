@@ -1,35 +1,44 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { Menu, Dropdown } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { getEmail, getToken, deleteToken } from 'components/Token';
+import { baseApiUrl } from 'components/Options';
 
-const TopProfile = ({ email }) => {
+const TopProfile = ({ logOut }) => {
   const [profile, setProfile] = useState('');
 
-  const getProfileImg = async email => {
-    await axios.get(`/api/user/userInfo/${email}`).then(res => {
-      setProfile(res.data);
-    });
+  const tokenEmail = getEmail();
+
+  const getProfilePicture = async () => {
+    if (getToken()) {
+      await axios
+        .get(`${baseApiUrl}/api/user/userInfo/${tokenEmail}`)
+        .then(res => {
+          setProfile(res.data);
+        });
+    }
   };
+
+  const { email, picture } = profile;
+
+  useEffect(() => {
+    getProfilePicture();
+  }, []);
 
   const menu = (
     <Menu>
       <Menu.Item key="0">
         <Link to={`/myprofile/${email}`}>내 프로필</Link>
       </Menu.Item>
-      <Menu.Item key="1">설정</Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">
-        <a href="http://localhost:8080/logout">로그아웃</a>
+        <div onClick={logOut}>로그아웃</div>
       </Menu.Item>
     </Menu>
   );
-
-  useEffect(() => {
-    getProfileImg(email);
-  }, []);
 
   return (
     <>
@@ -40,11 +49,7 @@ const TopProfile = ({ email }) => {
         trigger={['click']}
       >
         <span className="avatar-item">
-          <Avatar
-            shape="circle"
-            icon={<UserOutlined />}
-            src={profile.picture}
-          />
+          <Avatar shape="circle" icon={<UserOutlined />} src={picture} />
         </span>
       </Dropdown>
     </>

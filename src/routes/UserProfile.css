@@ -1,0 +1,80 @@
+.ant-modal-body {
+  padding: 20px;
+  margin: 0;
+}
+
+.ant-modal-content {
+  background-color: #31354e;
+  border: 0;
+  border-radius: 5px;
+}
+
+.ant-modal-footer {
+  display: none;
+}
+.ant-modal-close {
+  display: none;
+}
+
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userProfile__header {
+  width: 100%;
+  color: #fff;
+}
+
+.userProfile__header span {
+  cursor: pointer;
+}
+
+.userProfile__picture {
+  margin-bottom: 35px;
+}
+
+.userProfile__nickname {
+  font-size: 2em;
+  color: #fff;
+  font-family: nanumBarunGothicBold;
+  margin-bottom: 10px;
+}
+
+.userProfile__livingPlace {
+  color: #7c8097;
+  margin-bottom: 10px;
+}
+
+.userProfile__selfIntroduction {
+  color: #b7b8c0;
+  margin-bottom: 20px;
+}
+
+.userProfile__button {
+  background: linear-gradient(to top right, #8162ce, #f54ba5);
+  padding: 10px 30px 10px 30px;
+  margin-bottom: 30px;
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 13px 26px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
+  font-size: 16px;
+  font-family: nanumBarunGothicBold;
+  transition: background ease-out 500ms;
+}
+
+.userProfile__button:hover {
+  background: #fff;
+  color: #da59b1;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.userProfile__preference {
+  border-top: solid 1px #7c8097;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}

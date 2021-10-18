@@ -8,6 +8,8 @@ import UserProfile from 'routes/UserProfile';
 import 'routes/Post.css';
 import moment from 'moment';
 import { baseApiUrl } from 'components/Options';
+import { BsFillGeoAltFill } from 'react-icons/bs';
+import { getToken, getEmail } from 'components/Token';
 
 const Post = ({ match, history }) => {
   const { idx } = match.params;
@@ -16,6 +18,7 @@ const Post = ({ match, history }) => {
   const [post, setPost] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isRecruiting, setIsRecruiting] = useState('');
+  const [mine, setMine] = useState('');
 
   const [isModalVisible, setIsModalVisible] = useState(false); //모달 표시
 
@@ -40,19 +43,10 @@ const Post = ({ match, history }) => {
     event,
     addressName,
     placeName,
-    mine,
     recruiting,
     email,
     userPicture,
   } = post;
-
-  const getEmail = async () => {
-    await axios.get(`${baseApiUrl}/api/loginedUser`).then(res => {
-      if (res.data === '') {
-        // history.push('/LoginPage');
-      }
-    });
-  };
 
   const postDelete = () => {
     Swal.fire({
@@ -102,14 +96,16 @@ const Post = ({ match, history }) => {
   const getData = async () => {
     try {
       setIsLoading(true);
-      // await axios.get(`/api/board/posts/${idx}`).then(res => {
-      await axios
-        // .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
-        .get(`https://www.healthtogether.kro.kr/api/board/posts/${idx}`)
-        .then(res => {
-          setPost(res.data);
-          console.log(res);
-        });
+
+      await axios.get(`${baseApiUrl}/api/board/posts/${idx}`).then(res => {
+        setPost(res.data);
+
+        if (res.data.email === getEmail()) {
+          setMine(true);
+        } else {
+          setMine(false);
+        }
+      });
     } catch (e) {
       console.log('게시글을 불러오지 못했습니다.');
     }
@@ -117,8 +113,13 @@ const Post = ({ match, history }) => {
   };
 
   useEffect(() => {
+    if (!getToken()) {
+      history.push('/loginpage');
+    }
+  }, []);
+
+  useEffect(() => {
     getData();
-    getEmail();
   }, [isRecruiting]);
 
   return (
@@ -145,7 +146,9 @@ const Post = ({ match, history }) => {
               )}
             </div>
             <div className="info">
-              <div className="place">{placeName}</div>
+              <div className="place">
+                <BsFillGeoAltFill /> {placeName}
+              </div>
               <div className="label">사람수</div>
               <div className="detail">{needPeopleNum}</div>
               <div className="label">날짜</div>
@@ -168,24 +171,39 @@ const Post = ({ match, history }) => {
           {/* <li>아이디: {idx}</li> */}
           {isModalVisible && (
             <Modal
-              title={`${writer} 님의 프로필`}
+              title={``}
               visible={isModalVisible}
               onOk={handleOk}
               onCancel={handleCancel}
               footer={[]}
             >
-              <UserProfile email={email} />
+              <UserProfile
+                email={email}
+                handleCancel={handleCancel}
+                mine={mine}
+              />
             </Modal>
           )}
           <div className="description">
-            <div className="text">{content}</div>
+            {/* <div className="text">{content}</div> */}
+
+            <div className="text">
+              {content.split('\n').map(line => {
+                return (
+                  <>
+                    {line}
+                    <br />
+                  </>
+                );
+              })}
+            </div>
           </div>
           <br />
           <br />
           <div className="postButtonWraper">
-            {!mine && recruiting && <Button>참가신청</Button>}
+            {!mine && recruiting && <Button type="primary">참가신청</Button>}
             {!mine && !recruiting && <Button disabled>참가신청</Button>}
-            {!mine && (
+            {mine && (
               <>
                 {mine && recruiting && (
                   <Button onClick={postClose}>모집마감</Button>
@@ -196,7 +214,6 @@ const Post = ({ match, history }) => {
                 <Button onClick={postDelete}>삭제</Button>
               </>
             )}
-            <Button onClick={() => history.push('/')}>뒤로가기</Button>
           </div>
         </div>
       ) : (

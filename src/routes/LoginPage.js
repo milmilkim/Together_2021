@@ -3,12 +3,12 @@ import 'routes/LoginPage.css';
 const LoginPage = () => {
   return (
     <>
-      {/* <a href="https://www.healthtogether.kro.kr/oauth2/authorization/google">
+      {/*<a href="https://www.healthtogether.kro.kr/oauth2/authorization/google">
         임시 구글로그인
       </a>
       <a href="http://ec2-54-180-175-20.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google">
         임시 구글로그인 2
-      </a> */}
+  </a>*/}
 
       {/* <a href="http://localhost:8080/oauth2/authorization/kakao">
         임시 카카오 로그인 (localhost:8080으로...)

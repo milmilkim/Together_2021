@@ -21,6 +21,7 @@ import Swal from 'sweetalert2';
 import { selectEvent } from 'components/Options';
 import { getToken } from 'components/Token';
 import { getEmail } from 'components/Token';
+import { baseApiUrl } from 'components/Options';
 
 const WritePost = ({ history }) => {
   const [email, setEmail] = useState('');
@@ -57,17 +58,10 @@ const WritePost = ({ history }) => {
     }).then(result => {
       if (result.isConfirmed) {
         try {
-          axios
-            .post(
-              'http://ec2-54-180-175-20.ap-northeast-2.compute.amazonaws.com:8080/api/board/posts',
-              // 'https://www.healthtogether.kro.kr/api/board/posts',
-              post,
-              { withCredentials: true },
-            )
-            .then(() => {
-              Swal.fire('저장 완료!', '', 'success');
-              history.push('/');
-            });
+          axios.post(`${baseApiUrl}/api/board/posts`).then(() => {
+            Swal.fire('저장 완료!', '', 'success');
+            history.push('/');
+          });
         } catch (error) {
           console.log('에러');
         }
@@ -108,7 +102,6 @@ const WritePost = ({ history }) => {
       event: value.value,
     };
     setPost(nextPost);
-    console.log(value.value);
   }; //종목
 
   //--------------------충격! 어쩌다 이렇게 비효율적인 코드가....... (하지만머리가안돌아감)

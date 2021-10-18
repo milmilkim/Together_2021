@@ -1,0 +1,81 @@
+#searchWrap {
+  display: block;
+  clear: both;
+  overflow: hidden;
+  width: 100%;
+  margin: 50px auto 0 auto;
+}
+.searchList {
+  border: 1px solid #dedede;
+  float: left;
+  width: 46%;
+  margin: 0 2%;
+  margin-bottom: 4%;
+  text-align: center;
+  position: relative;
+  border-radius: 15px;
+  transition: all 0.3s;
+  background: #fff;
+}
+
+.searchList:hover {
+  box-shadow: 5px 5px 10px #ddd;
+}
+.searchList a {
+  display: block;
+  padding: 10% 3% 7% 3%;
+}
+.searchList a ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.searchList a ul li {
+  list-style: none;
+}
+
+.Rtitle {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#bottomWrap {
+  display: block;
+  overflow: hidden;
+  clear: both;
+  width: 100%;
+  margin: 0;
+}
+.Revent,
+.Rwrite {
+  font-size: 1.1em;
+  padding: 5px 15px;
+  background: #5ccece;
+  color: #fff;
+  border-radius: 15px;
+}
+.Revent {
+  float: left;
+  margin-left: 20px;
+}
+.Rwrite {
+  float: right;
+  margin-right: 20px;
+  color: #333;
+  font-weight: bold;
+  background: #fff;
+}
+.ComPlace {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #999;
+}
+.Rregion1,
+.Rregion2 {
+  display: inline-block;
+}
+.Rregion1 {
+  margin-right: 10px;
+}
+.Rplace {
+  margin-bottom: 30px;
+}

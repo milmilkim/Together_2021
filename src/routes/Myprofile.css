@@ -57,8 +57,19 @@
 
 .myProfile__preference {
   width: 100%;
-  display: flex;
-  justify-content: space-around;
   padding: 10px;
   border-top: 1px solid var(--color-gray);
+}
+
+.myProfile__preference--header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.myProfile__preference--body {
+  display: flex;
+  justify-content: space-around;
 }

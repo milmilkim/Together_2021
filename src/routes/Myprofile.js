@@ -10,7 +10,7 @@ import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { baseApiUrl } from 'components/Options';
 import { getToken } from 'components/Token';
-import { BsFillGeoAltFill } from 'react-icons/bs';
+import { BsFillGeoAltFill, BsFillHeartFill } from 'react-icons/bs';
 
 const Myprofile = ({ match, history }) => {
   const { email } = match.params;
@@ -182,31 +182,37 @@ const Myprofile = ({ match, history }) => {
 
           <div>
             <div className="myProfile__preference">
-              {editing ? (
-                <>
-                  <Input
-                    onChange={onChange}
-                    name="preference1"
-                    value={preference1}
-                  />
-                  <Input
-                    onChange={onChange}
-                    name="preference2"
-                    value={preference2}
-                  />
-                  <Input
-                    onChange={onChange}
-                    name="preference3"
-                    value={preference3}
-                  />
-                </>
-              ) : (
-                <>
-                  <span>{preference1}</span>
-                  <span>{preference2}</span>
-                  <span>{preference3}</span>
-                </>
-              )}
+              <span className="userProfile__preference--header">
+                <BsFillHeartFill />
+                　선호 컨텐츠
+              </span>
+              <div className="userProfile__preference--body">
+                {editing ? (
+                  <>
+                    <Input
+                      onChange={onChange}
+                      name="preference1"
+                      value={preference1}
+                    />
+                    <Input
+                      onChange={onChange}
+                      name="preference2"
+                      value={preference2}
+                    />
+                    <Input
+                      onChange={onChange}
+                      name="preference3"
+                      value={preference3}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <span>{preference1}</span>
+                    <span>{preference2}</span>
+                    <span>{preference3}</span>
+                  </>
+                )}
+              </div>
             </div>
             {/* <div className="site-card-wrapper"> */}
             {/* <Row gutter={16}>

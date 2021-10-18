@@ -57,7 +57,11 @@ const setCategory = () => {
       </Menu.Item>
 
       <Menu.Item key="12">
-        <Link to="/category/자전거">등산 </Link>
+        <Link to="/category/등산">등산 </Link>
+      </Menu.Item>
+
+      <Menu.Item key="13">
+        <Link to="/category/기타">기타</Link>
       </Menu.Item>
     </>
   );
@@ -70,10 +74,10 @@ const selectEvent = () => {
       <Select.Option value="축구">축구</Select.Option>
       <Select.Option value="야구">야구</Select.Option>
       <Select.Option value="농구">농구</Select.Option>
-      <Select.Option value="농구">배드민턴</Select.Option>
-      <Select.Option value="농구">조깅</Select.Option>
-      <Select.Option value="농구">헬스</Select.Option>
-      <Select.Option value="농구">자전거</Select.Option>
+      <Select.Option value="배드민턴">배드민턴</Select.Option>
+      <Select.Option value="조깅">조깅</Select.Option>
+      <Select.Option value="헬스">헬스</Select.Option>
+      <Select.Option value="자전거">자전거</Select.Option>
       <Select.Option value="등산">등산</Select.Option>
       <Select.Option value="기타">기타</Select.Option>
     </>
@@ -92,10 +96,6 @@ const setCarousel = [
   {
     key: 4,
     src: 'banner4.jpg',
-  },
-  {
-    key: 2,
-    src: 'banner2.jpg',
   },
 ];
 

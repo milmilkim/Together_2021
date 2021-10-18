@@ -1,4 +1,4 @@
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import ListCard from 'components/ListCard';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -12,6 +12,7 @@ const SearchPost = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState('');
+  const [totalPage, setTotalPage] = useState(0);
 
   const highlightedText = (text, query) => {
     if (query !== '' && text !== null && text.includes(query)) {
@@ -46,7 +47,7 @@ const SearchPost = () => {
         .get(`${baseApiUrl}/api/board/search/${keyword}?page=${page}`)
         .then(res => {
           setData(res.data.content);
-          console.log(res);
+          setTotalPage(res.data.totalPages);
         });
     } catch (e) {
       console.log(e);
@@ -57,7 +58,12 @@ const SearchPost = () => {
 
   useEffect(() => {
     getData();
+    setPage(0);
   }, [keyword]);
+
+  useEffect(() => {
+    getData();
+  }, [page]);
 
   return (
     <div>
@@ -93,6 +99,27 @@ const SearchPost = () => {
           </div>
         ))}
       </div>
+
+      {page > 0 && (
+        <Button
+          onClick={() => {
+            setPage(page - 1);
+            window.scrollTo(0, 0);
+          }}
+        >
+          이전
+        </Button>
+      )}
+      {page < totalPage - 1 && (
+        <Button
+          onClick={() => {
+            setPage(page + 1);
+            window.scrollTo(0, 0);
+          }}
+        >
+          다음
+        </Button>
+      )}
     </div>
   );
 };

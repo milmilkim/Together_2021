@@ -6,7 +6,7 @@ import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { baseApiUrl } from 'components/Options';
 import { FaArrowLeft, FaEnvelope } from 'react-icons/fa';
-import { BsFillGeoAltFill } from 'react-icons/bs';
+import { BsFillGeoAltFill, BsFillHeartFill } from 'react-icons/bs';
 
 const UserProfile = ({ email, handleCancel, mine }) => {
   const [profile, setProfile] = useState('');
@@ -58,9 +58,15 @@ const UserProfile = ({ email, handleCancel, mine }) => {
       )}
 
       <div className="userProfile__preference">
-        <span>{preference1}</span>
-        <span>{preference2}</span>
-        <span>{preference3}</span>
+        <span className="userProfile__preference--header">
+          <BsFillHeartFill />
+          　선호 컨텐츠
+        </span>
+        <div className="userProfile__preference--body">
+          <span>{preference1}</span>
+          <span>{preference2}</span>
+          <span>{preference3}</span>
+        </div>
       </div>
     </div>
   );

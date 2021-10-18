@@ -58,7 +58,7 @@ const WritePost = ({ history }) => {
     }).then(result => {
       if (result.isConfirmed) {
         try {
-          axios.post(`${baseApiUrl}/api/board/posts`).then(() => {
+          axios.post(`${baseApiUrl}/api/board/posts`, post).then(() => {
             Swal.fire('저장 완료!', '', 'success');
             history.push('/');
           });

@@ -1,15 +1,21 @@
-import ListCard from 'components/ListCard';
+import ListCardPagination from 'components/ListCardPagination';
 import { baseApiUrl } from 'components/Options';
+import { useEffect, useState } from 'react';
 
 const Category = ({ match }) => {
   //어쩌고
 
   const { category } = match.params;
 
+  useEffect(() => {}, [match.params]);
+
   return (
     <>
       <h1 style={{ paddingTop: '20px' }}> {category} </h1>
-      <ListCard getApi={`${baseApiUrl}/api/board/search/` + category} />
+      <ListCardPagination
+        getApi={`${baseApiUrl}/api/board/search/` + category}
+        category={category}
+      />
     </>
   );
 };

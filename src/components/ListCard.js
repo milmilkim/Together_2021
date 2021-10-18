@@ -13,13 +13,15 @@ import {
 import moment from 'moment';
 import { setThumbnail } from 'components/Options';
 import { BsFillGeoAltFill } from 'react-icons/bs';
+import { baseApiUrl } from 'components/Options';
 
-const ListCard = ({ getApi, keyword }) => {
+const ListCard = () => {
   //종목을 받아옴
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState('');
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0); //page가 0부터 시작
+  const [query, setQuery] = useState('');
 
   const { Meta } = Card;
 
@@ -41,27 +43,20 @@ const ListCard = ({ getApi, keyword }) => {
     try {
       setLoading(true);
 
-      await axios
-        .get(`${getApi}?page=${page}`)
-        // await axios.get(`https://healthtogether.kro.kr/api/board`).then(res => {
-        // await axios
-        // .get(`https://www.healthtogether.kro.kr/api/board?page=${page}`)
-        .then(res => {
-          console.log(res);
-          console.log(data);
-          setData(data.concat(res.data.content));
-          setPage(page + 1);
-        });
+      await axios.get(`${baseApiUrl}/api/board?page=${page}`).then(res => {
+        setData(data.concat(res.data.content));
+      });
     } catch (e) {
       console.log(e);
     }
+    setPage(page + 1);
 
     setLoading(false);
   };
 
   useEffect(() => {
     moreData();
-  }, [getApi]);
+  }, []);
 
   return (
     <div style={{ paddingTop: '20px' }}>

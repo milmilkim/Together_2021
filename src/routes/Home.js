@@ -53,7 +53,7 @@ const Home = () => {
 
       <h1 style={{ fontWeight: 700, marginBottom: '20px' }}> 찾아보기 😙 </h1>
 
-      <ListCard getApi={`${baseApiUrl}/api/board`} />
+      <ListCard />
     </>
   );
 };

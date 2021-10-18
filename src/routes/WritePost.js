@@ -20,8 +20,11 @@ import 'routes/WritePost.css';
 import Swal from 'sweetalert2';
 import { selectEvent } from 'components/Options';
 import { getToken } from 'components/Token';
+import { getEmail } from 'components/Token';
 
 const WritePost = ({ history }) => {
+  const [email, setEmail] = useState('');
+
   const [post, setPost] = useState({
     addressName: '　',
     content: '',
@@ -34,6 +37,7 @@ const WritePost = ({ history }) => {
     region1Depth: '　',
     region2Depth: '　',
     title: '',
+    email: '',
   }); //게시글
 
   const [visible, setVisible] = useState(false);
@@ -84,6 +88,7 @@ const WritePost = ({ history }) => {
     const nextPost = {
       ...post,
       [e.target.name]: e.target.value,
+      email: getEmail(),
     };
     setPost(nextPost);
   }; //제목과 내용
@@ -103,6 +108,7 @@ const WritePost = ({ history }) => {
       event: value.value,
     };
     setPost(nextPost);
+    console.log(value.value);
   }; //종목
 
   //--------------------충격! 어쩌다 이렇게 비효율적인 코드가....... (하지만머리가안돌아감)

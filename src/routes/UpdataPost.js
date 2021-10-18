@@ -43,6 +43,7 @@ const UpdatePost = ({ history, match }) => {
     region1Depth: '',
     region2Depth: '',
     title: '',
+    email: '',
   }); //포스트
 
   const [visible, setVisible] = useState(false);
@@ -131,7 +132,7 @@ const UpdatePost = ({ history, match }) => {
   const onChangeEvent = value => {
     const nextPost = {
       ...post,
-      event: value.value,
+      event: value,
     };
     setPost(nextPost);
   }; //종목
@@ -287,7 +288,7 @@ const UpdatePost = ({ history, match }) => {
               rules={[{ required: true, message: '종목을 고르세요' }]}
               name="event"
             >
-              <Select name="event" placeholder="종목" onChange={onChangeEvent}>
+              <Select name="종목" placeholder="종목" onChange={onChangeEvent}>
                 {selectEvent()}
               </Select>
             </Form.Item>

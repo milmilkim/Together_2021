@@ -6,11 +6,6 @@ import { baseApiUrl } from 'components/Options';
 const MapView = ({ history }) => {
   const [locations, setLocations] = useState([]);
   const [positions, setPositions] = useState([]);
-  const [page, setPage] = useState(0);
-
-  const goBack = () => {
-    history.goBack();
-  }; //뒤로가기 버튼
 
   const getData = async () => {
     await axios.get(`${baseApiUrl}/api/board/all`).then(res => {

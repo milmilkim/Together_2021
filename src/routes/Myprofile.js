@@ -1,10 +1,9 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Form, Button, Card, Col, Row } from 'antd';
+import { Button } from 'antd';
 import 'routes/Myprofile.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import LoginPage from 'routes/LoginPage';
 import { Avatar, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
@@ -39,17 +38,8 @@ const Myprofile = ({ match, history }) => {
     preference3,
   } = profile;
 
-  // for (let i = 10; i < 36; i++) {
-  //   const value = i.toString(36) + i;
-  //   options.push({
-  //     label: `Long Label: ${value}`,
-  //     value,
-  //   });
-  // }
-
   const profileUpdate = async () => {
     if (validatedNickname) {
-      console.log(profile);
       await axios
         .put(`${baseApiUrl}/api/user/userInfo/${email}`, profile)
         .then(() => setEditing(false));

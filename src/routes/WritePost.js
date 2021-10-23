@@ -9,7 +9,6 @@ import {
   Select,
   DatePicker,
   InputNumber,
-  Popconfirm,
   PageHeader,
   Radio,
   Space,
@@ -24,8 +23,6 @@ import { getEmail } from 'components/Token';
 import { baseApiUrl } from 'components/Options';
 
 const WritePost = ({ history }) => {
-  const [email, setEmail] = useState('');
-
   const [post, setPost] = useState({
     addressName: '　',
     content: '',
@@ -69,8 +66,7 @@ const WritePost = ({ history }) => {
     });
   }; //전송하고 홈으로~
 
-  const onChangeDate = (value, dateString) => {
-    console.log(dateString);
+  const onChangeDate = dateString => {
     const nextPost = {
       ...post,
       eventTime: dateString,
@@ -103,8 +99,6 @@ const WritePost = ({ history }) => {
     };
     setPost(nextPost);
   }; //종목
-
-  //--------------------충격! 어쩌다 이렇게 비효율적인 코드가....... (하지만머리가안돌아감)
 
   //--------------------위치 관련-------------------------
 
@@ -168,7 +162,6 @@ const WritePost = ({ history }) => {
           };
           setPost(nextPost);
           setInputLocation(address_name);
-          console.log(inputLocation);
           setVisible(false);
         }
       });

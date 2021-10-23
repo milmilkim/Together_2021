@@ -1,7 +1,6 @@
 import HomeCarousel from 'components/HomeCarousel';
 import { Link } from 'react-router-dom';
 import ListCard from 'components/ListCard';
-import { baseApiUrl } from 'components/Options';
 
 const Home = () => {
   return (

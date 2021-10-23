@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Dropdown } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { setCategory } from 'components/Options';
 

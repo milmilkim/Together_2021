@@ -124,9 +124,8 @@ h1 {
   padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
   overflow-x: scroll;
+  justify-content: center;
 }
 
 .home__icons::-webkit-scrollbar {
@@ -191,6 +190,10 @@ h1 {
     position: fixed;
     bottom: 0;
     z-index: 1;
+  }
+
+  .home__icons {
+    justify-content: left;
   }
 
   .ant-layout-header {

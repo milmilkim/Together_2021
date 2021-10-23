@@ -2,8 +2,6 @@ import React, { useRef, useEffect } from 'react';
 
 const Map = ({ lat, lng }) => {
   const { kakao } = window;
-  console.log(lat);
-  console.log(lng);
 
   const options = {
     center: new kakao.maps.LatLng(lat, lng), //중심위치 초기 설정(카카오)

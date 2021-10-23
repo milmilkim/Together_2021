@@ -1,15 +1,18 @@
 import 'antd/dist/antd.css';
 import 'App.less';
 import Layout from 'components/LayoutComponents/Layout';
-import { BrowserRouter, browserHistory } from 'react-router-dom';
-import Cookies from 'universal-cookie/es6';
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
+import client from 'Apollo';
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </ApolloProvider>
     </>
   );
 }

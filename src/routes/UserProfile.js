@@ -14,7 +14,6 @@ const UserProfile = ({ email, handleCancel, mine }) => {
   const getData = async () => {
     await axios.get(`${baseApiUrl}/api/user/userInfo/${email}`).then(res => {
       setProfile(res.data);
-      console.log(res.data);
     });
   };
 

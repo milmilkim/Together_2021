@@ -9,7 +9,6 @@ import {
   Select,
   DatePicker,
   InputNumber,
-  Popconfirm,
   PageHeader,
   Radio,
   Space,
@@ -83,11 +82,9 @@ const UpdatePost = ({ history, match }) => {
     ['event']: event,
   };
 
-  console.log(eventTime);
   //------------------------onChange등등
 
   const onsubmitForm = async () => {
-    console.log(post);
     await Swal.fire({
       title: '수정하시겠습니까?',
       showCancelButton: true,
@@ -104,7 +101,6 @@ const UpdatePost = ({ history, match }) => {
   }; //전송하고 홈으로~
 
   const onChangeDate = (value, dateString) => {
-    console.log(dateString);
     const nextPost = {
       ...post,
       eventTime: dateString,
@@ -121,7 +117,6 @@ const UpdatePost = ({ history, match }) => {
   }; //제목과 내용
 
   const onChangeNumber = value => {
-    console.log(value);
     const nextPost = {
       ...post,
       needPeopleNum: value,

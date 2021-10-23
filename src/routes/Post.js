@@ -161,9 +161,9 @@ const Post = ({ match, history }) => {
               <div className="detail">{addressName}</div>
               <div className="recruiting">
                 {recruiting ? (
-                  <div className="true">모집중</div>
+                  <div className="recruitingTrue">모집중</div>
                 ) : (
-                  <div className="false">모집완료</div>
+                  <div className="recruitingFalse">모집완료</div>
                 )}
               </div>
             </div>

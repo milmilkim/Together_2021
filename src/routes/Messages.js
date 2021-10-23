@@ -5,7 +5,7 @@ import { layoutState } from 'state';
 import { useRecoilState } from 'recoil';
 import { HomeOutlined } from '@ant-design/icons';
 import MessagesList from 'components/MessagesList';
-
+import { gql } from '@apollo/client';
 const Messages = ({ history }) => {
   const [visible, setVisible] = useState(false);
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
@@ -26,8 +26,8 @@ const Messages = ({ history }) => {
   //채팅창 토글
 
   const goBack = () => {
-    history.goBack();
-  }; //뒤로가기 버튼
+    history.push('/');
+  }; //홈으로
 
   useEffect(() => {
     return () => {

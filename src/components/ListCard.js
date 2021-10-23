@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import 'components/ListCard.scss';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Row, Col, Spin, Avatar } from 'antd';
+import { Row, Col, Avatar } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card } from 'antd';
@@ -12,7 +12,6 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 import { setThumbnail } from 'components/Options';
-import { BsFillGeoAltFill } from 'react-icons/bs';
 import { baseApiUrl } from 'components/Options';
 
 const ListCard = () => {
@@ -21,7 +20,6 @@ const ListCard = () => {
   const [loading, setLoading] = useState('');
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0); //page가 0부터 시작
-  const [query, setQuery] = useState('');
 
   const { Meta } = Card;
 

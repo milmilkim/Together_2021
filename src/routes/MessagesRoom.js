@@ -45,7 +45,6 @@ const MessagesRoom = ({ visible, closeMessagesModal }) => {
 
   const moreData = () => {
     setLoading(true);
-    console.log('more data...');
     setData(item.slice(-9).concat(data));
     setItem(item.slice(0, item.length - 9));
 

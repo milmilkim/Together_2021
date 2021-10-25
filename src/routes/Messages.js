@@ -5,7 +5,6 @@ import { layoutState } from 'state';
 import { useRecoilState } from 'recoil';
 import { HomeOutlined } from '@ant-design/icons';
 import MessagesList from 'components/MessagesList';
-import { gql } from '@apollo/client';
 const Messages = ({ history }) => {
   const [visible, setVisible] = useState(false);
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
@@ -61,7 +60,6 @@ const Messages = ({ history }) => {
           <MessagesList openMessagesModal={openMessagesModal} />
           <MessagesList openMessagesModal={openMessagesModal} />
           <MessagesList openMessagesModal={openMessagesModal} />
-          {/* 여기는 나중에 리스트로 바꿔야 합니다 */}
         </div>
       </div>
       <div>

@@ -12,8 +12,8 @@ const MessagesList = ({ openMessagesModal }) => {
             avatar={
               <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
             }
-            title="Card title"
-            description="This is the description"
+            title="채팅방제목"
+            description="숭구리당당숭당당"
           />
         </Card>
       </a>

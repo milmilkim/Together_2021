@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Contents from 'routes/Contents';
 import Home from 'routes/Home';
 import LoginPage from 'routes/LoginPage';
@@ -11,6 +11,7 @@ import Category from 'routes/Category';
 import SearchPost from 'routes/SearchPost';
 import UpdatePost from 'routes/UpdataPost';
 import userProfile from 'routes/UserProfile';
+import Chat from 'routes/Chat';
 
 const AppRouter = () => {
   return (
@@ -20,7 +21,7 @@ const AppRouter = () => {
       <Route exact path="/contents" component={Contents} />
       <Route exact path="/loginpage" component={LoginPage} />
       <Route exact path="/writepost" component={WritePost} />
-      <Route exact path="/messages" component={Messages} />
+      <Route exact path="/messages" component={Chat} />
       <Route exact path="/myprofile/:email" component={Myprofile} />
       <Route exact path="/myprofile" component={Myprofile} />
       <Route exact path="/userprofile/:email" component={userProfile} />

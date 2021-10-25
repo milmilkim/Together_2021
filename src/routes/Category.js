@@ -1,6 +1,6 @@
 import ListCardPagination from 'components/ListCardPagination';
 import { baseApiUrl } from 'components/Options';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const Category = ({ match }) => {
   //어쩌고

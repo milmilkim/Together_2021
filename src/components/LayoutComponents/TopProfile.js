@@ -1,10 +1,10 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { Menu, Dropdown } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getEmail, getToken, deleteToken } from 'components/Token';
+import { getEmail, getToken } from 'components/Token';
 import { baseApiUrl } from 'components/Options';
 
 const TopProfile = ({ logOut }) => {

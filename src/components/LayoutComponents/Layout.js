@@ -1,5 +1,4 @@
-import { Layout as AntLayout, BackTop } from 'antd';
-import { ArrowUpOutlined } from '@ant-design/icons';
+import { Layout as AntLayout } from 'antd';
 import LayoutHeader from 'components/LayoutComponents/LayoutHeader';
 import MobileMenu from 'components/LayoutComponents/MobileMenu';
 import AppRouter from 'components/Router';
@@ -8,6 +7,7 @@ import 'components/LayoutComponents/Layout.css';
 import { useEffect } from 'react';
 import { setToken } from 'components/Token';
 import { withRouter } from 'react-router';
+import ChatBot from 'components/ChatBot';
 
 const Layout = ({ history }) => {
   const { Content } = AntLayout;
@@ -17,19 +17,6 @@ const Layout = ({ history }) => {
     history.push('/');
   }, []);
 
-  const style = {
-    height: 40,
-    width: 40,
-    lineHeight: '40px',
-    borderRadius: 20,
-    backgroundColor: '#5cdbd3',
-    color: '#ffffff',
-    textAlign: 'center',
-    fontSize: 14,
-    bottom: '80px',
-    position: 'fixed',
-  };
-
   return (
     <AntLayout className="layout">
       <LayoutHeader />
@@ -37,15 +24,11 @@ const Layout = ({ history }) => {
       <MobileMenu />
       <Content>
         <AppRouter />
-        <BackTop>
-          <div style={style}>
-            <ArrowUpOutlined />
-          </div>
-        </BackTop>{' '}
-        {/*앵커*/}
       </Content>
 
       <LayoutFooter />
+
+      <ChatBot />
     </AntLayout>
   );
 };

@@ -162,6 +162,21 @@ h1 {
   justify-content: center;
 }
 
+/* 챗봇 */
+.sc-launcher,
+.sc-launcher img {
+  bottom: 70px !important;
+}
+
+.sc-chat-window.opened {
+  bottom: 150px !important;
+  z-index: 99 !important;
+}
+
+.sc-user-input--file-icon-wrapper {
+  display: none !important;
+}
+
 /* 반응형*/
 @media screen and (max-width: 1024px) {
   .header_wrap,

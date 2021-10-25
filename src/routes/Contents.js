@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import MapView from './MapView';
 
 const Contents = ({ history }) => {

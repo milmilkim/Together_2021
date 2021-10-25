@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import 'components/ListCard.scss';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { Row, Col, Spin, Avatar } from 'antd';
+import { Row, Col, Avatar } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card, Button } from 'antd';
@@ -12,7 +11,6 @@ import {
 } from '@ant-design/icons';
 import moment from 'moment';
 import { setThumbnail } from 'components/Options';
-import { BsFillGeoAltFill } from 'react-icons/bs';
 import { baseApiUrl } from 'components/Options';
 
 const ListCard = ({ category }) => {

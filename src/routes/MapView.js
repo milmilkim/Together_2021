@@ -8,7 +8,7 @@ const MapView = ({ history }) => {
   const [positions, setPositions] = useState([]);
 
   const getData = async () => {
-    await axios.get(`${baseApiUrl}/api/board/all`).then(res => {
+    await axios.get(`${baseApiUrl}/api/board/allposts`).then(res => {
       const data = res.data;
       setLocations(data);
 
@@ -44,7 +44,6 @@ const MapView = ({ history }) => {
   const kakaoMap = () => {
     //현재 위치를 중앙으로 해서 지도를 출력합니다.
 
-    console.log(positions);
     const map = new kakao.maps.Map(container.current, options); //지도 생성
 
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다

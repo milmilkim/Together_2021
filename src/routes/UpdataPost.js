@@ -132,8 +132,6 @@ const UpdatePost = ({ history, match }) => {
     setPost(nextPost);
   }; //종목
 
-  //--------------------충격! 어쩌다 이렇게 비효율적인 코드가....... (하지만머리가안돌아감)
-
   // --------------------위치 관련-------------------------
 
   const myLocation = () => {
@@ -225,8 +223,8 @@ const UpdatePost = ({ history, match }) => {
           locationX: x,
           locationY: y,
           placeName: place_name,
-          region1Depth: address_name.split(' ')[0], //시도 단위
-          region2Depth: address_name.split(' ')[1], //구 단위 .........풀 주소만 지원하는 관계로 단어로 자름 ~_~ ..
+          region1Depth: address_name.split(' ')[0], //시도 단위 (서울시)
+          region2Depth: address_name.split(' ')[1], //구 단위  (성동구)
           addressName: address_name,
         };
         setPost(nextPost);

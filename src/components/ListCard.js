@@ -105,7 +105,13 @@ const ListCard = () => {
 
                     <Meta
                       className="card__profile"
-                      avatar={<Avatar size={60} src={list.userPicture} />} //프로필 이미지
+                      avatar={
+                        <Avatar
+                          size={60}
+                          icon={<UserOutlined />}
+                          src={list.userPicture}
+                        />
+                      } //프로필 이미지
                     />
                     <Meta
                       className="card__name"

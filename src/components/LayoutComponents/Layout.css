@@ -169,8 +169,8 @@ h1 {
 }
 
 .sc-chat-window.opened {
-  bottom: 150px !important;
-  z-index: 99 !important;
+  z-index: 99;
+  bottom: 150px;
 }
 
 .sc-user-input--file-icon-wrapper {
@@ -203,7 +203,7 @@ h1 {
   .mobileMenu {
     display: block;
     position: fixed;
-    bottom: 0;
+    bottom: 0 !important;
     z-index: 1;
   }
 
@@ -215,6 +215,14 @@ h1 {
     position: sticky;
     padding: 0;
     padding-left: 10px;
+  }
+
+  .sc-chat-window.opened {
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    top: 0;
+    max-height: 100vh;
   }
 
   .ant-layout-footer {

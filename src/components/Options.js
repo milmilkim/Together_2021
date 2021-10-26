@@ -21,7 +21,7 @@ const setThumbnail = {
   자전거: 'https://src.hidoc.co.kr/image/lib/2021/9/29/1632899080192_0.jpg',
   등산: 'http://www.k-health.com/news/photo/201804/35590_22818_1341.jpg',
   기타:
-    'https://file.mk.co.kr/meet/neds/2021/06/image_readtop_2021_535745_16226846584668330.jpg', //적당히 스포츠적이고 무난한 이미지
+    'https://images.unsplash.com/photo-1579547621706-1a9c79d5c9f1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80', //적당히 스포츠적이고 무난한 이미지
 };
 
 const setCategory = () => {

@@ -64,7 +64,7 @@ const WritePost = ({ history }) => {
         }
       }
     });
-  }; //전송하고 홈으로~
+  }; //전송하고 홈으로
 
   const onChangeDate = dateString => {
     const nextPost = {
@@ -141,7 +141,7 @@ const WritePost = ({ history }) => {
         address_name,
         region_1depth_name,
         region_2depth_name,
-      } = myAddress; //구조분해할당
+      } = myAddress;
 
       Swal.fire({
         title: '이 위치를 등록할까요?',
@@ -191,7 +191,7 @@ const WritePost = ({ history }) => {
           locationY: y,
           placeName: place_name,
           region1Depth: address_name.split(' ')[0], //시도 단위
-          region2Depth: address_name.split(' ')[1], //구 단위 .........풀 주소만 지원하는 관계로 단어로 자름 ~_~ ..
+          region2Depth: address_name.split(' ')[1], //구 단위로 자릅니다
           addressName: address_name,
         };
         setPost(nextPost);

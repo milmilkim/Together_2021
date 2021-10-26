@@ -13,14 +13,7 @@ const ChatBot = () => {
       author: 'them',
       type: 'text',
       data: {
-        text: '안녕하세요',
-      },
-    },
-    {
-      author: 'them',
-      type: 'text',
-      data: {
-        text: '저도반가워요...',
+        text: '챗봇이에요...',
       },
     },
   ];

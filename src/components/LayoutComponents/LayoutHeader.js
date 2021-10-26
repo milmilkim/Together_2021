@@ -56,7 +56,7 @@ const LayoutHeader = ({ history }) => {
                     <Link to="/writepost">
                       <PlusSquareOutlined style={{ fontSize: '30px' }} />
                     </Link>
-                    <Badge count={1}>
+                    <Badge>
                       <Link to="/messages">
                         <MessageOutlined style={{ fontSize: '30px' }} />
                       </Link>

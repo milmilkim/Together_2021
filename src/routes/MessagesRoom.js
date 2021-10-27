@@ -1,115 +1,173 @@
+import React, { useState, useEffect } from 'react';
+import { gql, useApolloClient, useSubscription } from '@apollo/client';
+
 import { PageHeader } from 'antd';
-import { Input } from 'antd';
-import { SendOutlined } from '@ant-design/icons';
 
-import 'components/ListCard.scss';
-import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import MessageInput from 'components/MessageInput';
 
-import Message from 'components/Message';
-import ScrollToTop from 'components/ScrollToTop';
+import moment from 'moment';
 
-const MessagesRoom = ({ visible, closeMessagesModal }) => {
-  const { TextArea } = Input;
+export default function MessagesRoom({ chatId, userId, setChatId, chatName }) {
+  const [messages, setMessages] = useState([]);
+  const [after, setAfter] = useState(null);
+  const [more, setMore] = useState(true);
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [item, setItem] = useState([]);
-  const [scroll, setScroll] = useState('');
+  const client = useApolloClient();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const scrollRef = useRef(null);
-
-  const scrollToBottom = () => {
-    if (loading === false) {
-      scrollRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-        inline: 'nearest',
-      }); //스크롤바를 맨 밑으로 내리는 함수
-    }
-  };
-
-  const getData = async () => {
-    try {
-      setLoading(true);
-      await axios.get('dummy/fakeChat.json').then(res => {
-        const datas = res.data;
-        setData(datas.slice(-9)); //일단 마지막의 9개를 보여주도록 했습니다. 변수로 설정하는 게 나을 듯..
-        setItem(datas.slice(0, datas.length - 9)); //나머지를 저장합니다
-      });
-    } catch (e) {
-      console.log('-_-+');
-    }
-    setLoading(false);
-  };
-
-  const moreData = () => {
+  async function fetchMessages() {
     setLoading(true);
-    setData(item.slice(-9).concat(data));
-    setItem(item.slice(0, item.length - 9));
-
+    const result = await client.query({
+      query: gql`
+        query GetMessages($id: ID!, $after: ID) {
+          chat(id: $id) {
+            messages(first: 5, after: $after, desc: true) {
+              id
+              content
+              sender {
+                id
+                name
+              }
+              createdAt
+            }
+          }
+        }
+      `,
+      variables: { id: chatId, after },
+    });
     setLoading(false);
-  };
+    setError(result.error);
+    const messages = Array.from(result.data?.chat?.messages ?? []).reverse();
+    if (!messages.length) {
+      setMore(false);
+      return;
+    }
+    setMessages(prevMessages => [...messages, ...prevMessages]);
+    setAfter(messages[0].id);
+  }
+  useEffect(() => fetchMessages(), []);
 
+  const [userTyping, setUserTyping] = useState(null);
   useEffect(() => {
-    scrollToBottom();
-  }, [visible]); //일단 창이 열리면 맨 밑으로 가는 함수가 실행되는데 나중에 대화 내용이 갱신되면 실행되도록 수정해야 합니다.
+    if (!userTyping) return;
+    const timer = setTimeout(() => setUserTyping(null), 2000);
+    return () => clearTimeout(timer);
+  }, [userTyping]);
 
-  useEffect(() => {
-    getData();
-  }, []);
+  useSubscription(
+    gql`
+      subscription ChatEvent($userId: ID!) {
+        chatEvent(userId: $userId) {
+          type
+          chatId
+          message {
+            id
+            content
+            sender {
+              id
+              name
+            }
+            createdAt
+          }
+          user {
+            name
+          }
+        }
+      }
+    `,
+    {
+      variables: { userId },
+      onSubscriptionData: ({ subscriptionData: { data } }) => {
+        const event = data.chatEvent;
+        if (event.chatId !== chatId) return;
+        switch (event.type) {
+          case 'MESSAGE_POSTED':
+            setMessages(prevMessages => [...prevMessages, event.message]);
+            break;
+          case 'USER_TYPING':
+            setUserTyping(event.user?.name);
+            break;
+        }
+      },
+    },
+  );
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
   return (
-    <>
-      {visible ? (
-        <div className="messages__modal">
-          <PageHeader
-            className="site-page-header"
-            onBack={() => closeMessagesModal()} //창이 닫힙니다.
-            title="이름"
-            subTitle="@aa"
-          />
+    <div className="messages__modal">
+      <PageHeader
+        className="site-page-header"
+        onBack={() => setChatId(0)} //창이 닫힙니다.
+        title={chatName}
+        subTitle="@aa"
+      />
 
-          <div className="messages__modal--container">
-            <div className="messages__modal--input">
-              <div className="messages__modal--input--textArea">
-                <TextArea
-                  placeholder="입력"
-                  autoSize={{ minRows: 1, maxRows: 6 }} //최소 1줄, 최대 6줄까지 엔터로 늘어납니다.
-                />
-              </div>
+      <div className="messages__modal--container">
+        <div className="messages__modal--input">
+          <MessageInput chatId={chatId} />
+        </div>
+        <div className="messages__modal--messages">
+          <div>
+            {more && (
+              <a
+                onClick={() => fetchMessages()}
+                className="underline text-blue-600 hover:text-blue-800 cursor-pointer"
+              >
+                Load more
+              </a>
+            )}
 
-              <div className="messages_modal--input--send">
-                <SendOutlined />
-              </div>
-            </div>
-            {/* 텍스트 입력창 */}
-            <div className="messages__modal--messages">
-              <div ref={scrollRef}>
-                {loading ? (
-                  <>loading...</>
-                ) : (
-                  <>
-                    <button onClick={moreData}>이전 대화 불러오기</button>
-                    {/* 예쁜 버튼으로 바꿔주세요 */}
-                    {data.map((list, index) => (
-                      <Message
-                        key={index}
-                        user={list.user}
-                        message={list.message}
-                      />
-                    ))}
-                  </>
-                )}
-              </div>
-            </div>
+            {messages.map(message => {
+              console.log(message);
+              if (message.sender.id == userId) {
+                return (
+                  <div className="message-row message-row--own">
+                    <div className="message-row__content">
+                      <div className="message__info">
+                        <span className="message__bubble">
+                          {' '}
+                          {message.content}
+                        </span>
+                        <span className="message__time">
+                          {moment(message.createdAt).format('YYYY-MM-DD HH:mm')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="message-row">
+                    <img
+                      src="https://images.unsplash.com/photo-1546842931-886c185b4c8c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1970&q=80"
+                      alt="임시"
+                    />
+
+                    <div className="message-row__content">
+                      <span className="message__author">
+                        {message.sender?.name}
+                      </span>
+                      <div className="message__info">
+                        <span className="message__bubble">
+                          {message.content}
+                        </span>
+                        <span className="message__time">
+                          {moment(message.createdAt).format('YYYY-MM-DD HH:mm')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+            {userTyping && (
+              <div className="userTyping">{userTyping} is typing...</div>
+            )}
           </div>
         </div>
-      ) : (
-        <div ref={scrollRef} />
-      )}
-    </>
+      </div>
+    </div>
   );
-};
-
-export default MessagesRoom;
+}

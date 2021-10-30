@@ -4,18 +4,18 @@ import { Menu, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getEmail, getToken } from 'components/Token';
+import { getEmail, getToken, getId } from 'components/Token';
 import { baseApiUrl } from 'components/Options';
 
 const TopProfile = ({ logOut }) => {
   const [profile, setProfile] = useState('');
 
-  const tokenEmail = getEmail();
+  const userID = getId();
 
   const getProfilePicture = async () => {
     if (getToken()) {
       await axios
-        .get(`${baseApiUrl}/api/user/userInfo/${tokenEmail}`)
+        .get(`${baseApiUrl}/api/user/userInfo/id/${userID}`)
         .then(res => {
           setProfile(res.data);
         });
@@ -31,7 +31,7 @@ const TopProfile = ({ logOut }) => {
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <Link to={`/myprofile/${email}`}>내 프로필</Link>
+        <Link to={`/myprofile/${userID}`}>내 프로필</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="2">

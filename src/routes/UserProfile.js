@@ -8,7 +8,7 @@ import { baseApiUrl } from 'components/Options';
 import { FaArrowLeft, FaEnvelope } from 'react-icons/fa';
 import { BsFillGeoAltFill, BsFillHeartFill } from 'react-icons/bs';
 
-const UserProfile = ({ email, handleCancel, mine }) => {
+const UserProfile = ({ email, handleCancel, mine, history }) => {
   const [profile, setProfile] = useState('');
 
   const getData = async () => {
@@ -47,14 +47,17 @@ const UserProfile = ({ email, handleCancel, mine }) => {
         <BsFillGeoAltFill /> {livingPlace}
       </div>
       <div className="userProfile__selfIntroduction">{selfIntroduction}</div>
-      {!mine && (
-        <div className="userProfile__button">
+      {/* {!mine && (
+        <div
+          onClick={() => history.push('/messages')}
+          className="userProfile__button"
+        >
           <span>
             <FaEnvelope />
           </span>
           &nbsp;&nbsp;메세지 보내기
         </div>
-      )}
+      )} */}
 
       <div className="userProfile__preference">
         <span className="userProfile__preference--header">

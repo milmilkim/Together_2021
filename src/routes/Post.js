@@ -10,6 +10,8 @@ import moment from 'moment';
 import { baseApiUrl } from 'components/Options';
 import { BsFillGeoAltFill } from 'react-icons/bs';
 import { getToken, getEmail } from 'components/Token';
+import { ChatClient } from 'components/ChatClient';
+import { getId } from 'components/Token';
 
 const Post = ({ match, history }) => {
   const { idx } = match.params;
@@ -19,6 +21,7 @@ const Post = ({ match, history }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRecruiting, setIsRecruiting] = useState('');
   const [mine, setMine] = useState('');
+  const [userId, setUserId] = useState('');
 
   const [isModalVisible, setIsModalVisible] = useState(false); //모달 표시
 
@@ -112,6 +115,37 @@ const Post = ({ match, history }) => {
     setIsLoading(false);
   };
 
+  const client = new ChatClient({
+    httpUrl: 'https://chat.habin.io/query',
+    wsUrl: 'wss://chat.habin.io/query',
+    // httpUrl: 'http://localhost:8080/query',
+    // wsUrl: 'ws://localhost:8080/query',
+    token: getId(),
+  });
+
+  const join = async () => {
+    let chatId;
+    let userId;
+    try {
+      userId = await axios
+        .get(`${baseApiUrl}/api/user/userInfo/${email}`)
+        .then(res => {
+          return res.data.id;
+        });
+
+      chatId = await client.createChat(userId);
+
+      client.postMessage({
+        chatId: chatId,
+        message: `${title}`,
+      });
+
+      history.push(`/messages/${chatId}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     if (!getToken()) {
       history.push('/loginpage');
@@ -181,6 +215,7 @@ const Post = ({ match, history }) => {
                 email={email}
                 handleCancel={handleCancel}
                 mine={mine}
+                history={history}
               />
             </Modal>
           )}
@@ -201,7 +236,11 @@ const Post = ({ match, history }) => {
           <br />
           <br />
           <div className="postButtonWraper">
-            {!mine && recruiting && <Button type="primary">참가신청</Button>}
+            {!mine && recruiting && (
+              <Button onClick={join} type="primary">
+                참가신청
+              </Button>
+            )}
             {!mine && !recruiting && <Button disabled>참가신청</Button>}
             {mine && (
               <>

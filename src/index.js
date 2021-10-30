@@ -12,10 +12,11 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { getId } from 'components/Token';
 
 const params = new URLSearchParams(window.location.search);
 // const userId = params.get('userId') ?? 1;
-const userId = 2;
+const userId = getId();
 
 const httpLink = createHttpLink({
   uri: 'https://chat.habin.io/query',
@@ -27,7 +28,7 @@ const wsLink = new WebSocketLink({
     connectionParams: () => {
       return {
         headers: {
-          'user-id': 1,
+          'user-id': userId,
         },
       };
     },
@@ -49,7 +50,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : '',
-      'user-id': 1,
+      'user-id': userId,
     },
   };
 });

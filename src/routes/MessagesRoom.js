@@ -18,6 +18,7 @@ export default function MessagesRoom({ chatId, userId, setChatId, chatName }) {
 
   async function fetchMessages() {
     setLoading(true);
+    console.log(userId);
     const result = await client.query({
       query: gql`
         query GetMessages($id: ID!, $after: ID) {
@@ -101,7 +102,7 @@ export default function MessagesRoom({ chatId, userId, setChatId, chatName }) {
         className="site-page-header"
         onBack={() => setChatId(0)} //창이 닫힙니다.
         title={chatName}
-        subTitle="@aa"
+        subTitle="chat"
       />
 
       <div className="messages__modal--container">

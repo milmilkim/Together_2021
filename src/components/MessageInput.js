@@ -3,8 +3,6 @@ import { gql, useMutation } from '@apollo/client';
 import throttle from 'lodash/throttle';
 import { Input } from 'antd';
 
-import { SendOutlined } from '@ant-design/icons';
-
 export default function MessageInput({ chatId }) {
   const { TextArea } = Input;
 
@@ -60,12 +58,9 @@ export default function MessageInput({ chatId }) {
           value={message}
           onChange={e => setMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          autoSize={{ minRows: 1, maxRows: 6 }} //최소 1줄, 최대 6줄까지 엔터로 늘어납니다.
+          autoSize={{ minRows: 1, maxRows: 6 }}
+          size="large"
         />
-      </div>
-
-      <div className="messages_modal--input--send">
-        <SendOutlined />
       </div>
     </>
   );

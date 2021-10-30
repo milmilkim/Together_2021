@@ -7,13 +7,17 @@ import { HomeOutlined } from '@ant-design/icons';
 import MessagesList from 'components/MessagesList';
 import { gql, useMutation } from '@apollo/client';
 import 'components/Message.css';
+import { getToken, getId } from 'components/Token';
 
-const Messages = ({ history }) => {
+const Messages = ({ history, match }) => {
   const [visible, setVisible] = useState(false);
   const [layoutVisible, setLayoutVisible] = useRecoilState(layoutState);
   const [chatId, setChatId] = useState(0);
-  const userId = 1;
   const [chatName, setChatName] = useState('');
+
+  console.log(match.params.chatId);
+
+  const userId = getId();
 
   setLayoutVisible(false);
 
@@ -29,19 +33,18 @@ const Messages = ({ history }) => {
     };
   }, []);
 
-  const [setAsOnline] = useMutation(gql`
-    mutation SetAsOnline {
-      setAsOnline {
-        status
-      }
-    }
-  `);
   useEffect(() => {
-    const interval = setInterval(setAsOnline, 30 * 1000);
-    setAsOnline();
-    return () => clearInterval(interval);
+    if (!getToken()) {
+      history.push('/loginpage');
+    }
   }, []);
 
+  useEffect(() => {
+    if (match.params.chatId === undefined) {
+    } else {
+      setChatId(match.params.chatId);
+    }
+  }, []);
   return (
     <div className="messages__inbox--container">
       <div className="messages__inbox">
@@ -59,7 +62,11 @@ const Messages = ({ history }) => {
           <div className="messages__header--column" />
         </div>
         <div className="messages__inbox--wrap">
-          <MessagesList setChatId={setChatId} setChatName={setChatName} />
+          <MessagesList
+            chatId={chatId}
+            setChatId={setChatId}
+            setChatName={setChatName}
+          />
         </div>
       </div>
       <div>

@@ -11,7 +11,6 @@ import Category from 'routes/Category';
 import SearchPost from 'routes/SearchPost';
 import UpdatePost from 'routes/UpdataPost';
 import userProfile from 'routes/UserProfile';
-import Chat from 'routes/Chat';
 
 const AppRouter = () => {
   return (
@@ -21,8 +20,9 @@ const AppRouter = () => {
       <Route exact path="/contents" component={Contents} />
       <Route exact path="/loginpage" component={LoginPage} />
       <Route exact path="/writepost" component={WritePost} />
+      <Route exact path="/messages/:chatId" component={Messages} />
       <Route exact path="/messages" component={Messages} />
-      <Route exact path="/myprofile/:email" component={Myprofile} />
+      <Route exact path="/myprofile/:id" component={Myprofile} />
       <Route exact path="/myprofile" component={Myprofile} />
       <Route exact path="/userprofile/:email" component={userProfile} />
       <Route exact path="/post/:idx" component={Post} />

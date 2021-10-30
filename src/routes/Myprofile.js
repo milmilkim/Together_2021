@@ -12,17 +12,20 @@ import { getToken } from 'components/Token';
 import { BsFillGeoAltFill, BsFillHeartFill } from 'react-icons/bs';
 
 const Myprofile = ({ match, history }) => {
-  const { email } = match.params;
+  const { id } = match.params;
+
+  console.log(match.params);
   const [profile, setProfile] = useState(''); //프로필
   const [editing, setEditing] = useState(false); //수정 여부
   const [validatedNickname, setValidatedNickname] = useState(true); //중복확인 여부
   const [prevNickname, setPrevNickname] = useState('');
 
   const getData = async () => {
-    if (email === undefined) {
-      history.push('/loginpage');
-    }
-    await axios.get(`${baseApiUrl}/api/user/userInfo/${email}`).then(res => {
+    // if (email === undefined) {
+    //   history.push('/loginpage');
+    // }
+    await axios.get(`${baseApiUrl}/api/user/userInfo/id/${id}`).then(res => {
+      console.log(res);
       setProfile(res.data);
       setPrevNickname(res.data.nickname);
     });
@@ -36,6 +39,7 @@ const Myprofile = ({ match, history }) => {
     preference1,
     preference2,
     preference3,
+    email,
   } = profile;
 
   const profileUpdate = async () => {

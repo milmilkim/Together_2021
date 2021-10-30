@@ -29,6 +29,15 @@ const getEmail = () => {
   }
 };
 
+const getId = () => {
+  const TOKEN = cookies.get('TOKEN');
+
+  if (!!TOKEN) {
+    const objectToken = ParseJwt(TOKEN);
+    const id = objectToken.userID;
+    return id;
+  }
+};
 const deleteToken = () => {
   cookies.set('TOKEN', '', -1);
 };
@@ -48,4 +57,4 @@ function ParseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
-export { ParseJwt, getToken, getEmail, setToken, deleteToken };
+export { ParseJwt, getToken, getEmail, setToken, deleteToken, getId };

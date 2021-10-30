@@ -9,12 +9,13 @@ import { useState, useEffect } from 'react';
 import LoginPage from 'routes/LoginPage';
 
 const Myprofile = ({ match }) => {
-  const { email } = match.params;
+  const { id } = match.params;
   const [profile, setProfile] = useState('');
 
   const getData = async () => {
-    await axios.get(`/api/user/userInfo/${email}`).then(res => {
+    await axios.get(`/api/user/userInfo/id/${id}`).then(res => {
       setProfile(res.data);
+      console.log(res);
     });
   };
 
